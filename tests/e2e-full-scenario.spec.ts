@@ -133,8 +133,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     // AI 로딩 대기 (최대 60초)
     await expect(page.getByText("분석 중")).toBeVisible({ timeout: 5000 }).catch(() => {});
 
-    // AI 결과가 표시될 때까지 대기 (제목에 "한 해" 포함)
-    await expect(page.locator("h1:has-text('한 해')")).toBeVisible({ timeout: 60000 });
+    // AI 결과가 표시될 때까지 대기 (h1에 "2025" 포함)
+    await expect(page.locator("h1:has-text('2025')")).toBeVisible({ timeout: 60000 });
 
     // 결과 섹션들이 있는지 확인
     await expect(page.getByText("2025년 총평")).toBeVisible();
@@ -200,8 +200,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     // 결과 페이지로 이동 확인
     await expect(page).toHaveURL(/\/test\/free\/result/, { timeout: 10000 });
 
-    // AI 결과가 표시될 때까지 대기 (제목에 "한 해" 포함)
-    await expect(page.locator("h1:has-text('한 해')")).toBeVisible({ timeout: 60000 });
+    // AI 결과가 표시될 때까지 대기 (h1에 "2025" 포함)
+    await expect(page.locator("h1:has-text('2025')")).toBeVisible({ timeout: 60000 });
 
     // 결과 섹션 확인
     await expect(page.getByText("2025년 총평")).toBeVisible();

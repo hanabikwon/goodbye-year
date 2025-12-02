@@ -1,8 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import Image from "next/image";
+import html2canvas from "html2canvas";
 import { standardQuestions } from "@/data/questions";
 
 interface AIResult {
@@ -20,8 +21,17 @@ function FreeResultContent() {
   const [isGenerating, setIsGenerating] = useState(true);
   const [aiResult, setAiResult] = useState<AIResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [userName, setUserName] = useState<string>("");
+  const resultRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // localStorage에서 사용자 이름 가져오기
+    const storedName = localStorage.getItem("userName");
+    if (storedName) {
+      setUserName(storedName);
+    }
+
     const data = searchParams.get("data");
     if (data) {
       try {
@@ -87,6 +97,28 @@ function FreeResultContent() {
     }
   };
 
+  const handleDownloadImage = async () => {
+    if (!resultRef.current) return;
+
+    setIsSaving(true);
+    try {
+      const canvas = await html2canvas(resultRef.current, {
+        backgroundColor: "#faf6f0",
+        scale: 2,
+        useCORS: true,
+      });
+
+      const link = document.createElement("a");
+      link.download = `2025-연말결산-${Date.now()}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    } catch (e) {
+      console.error("이미지 저장 실패:", e);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   if (isGenerating) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-6">
@@ -117,8 +149,9 @@ function FreeResultContent() {
   return (
     <main className="min-h-screen py-10 px-4">
       <div className="max-w-md mx-auto">
+        <div ref={resultRef} className="bg-[#faf6f0] pb-6">
         {/* 헤더 */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 pt-4">
           <div className="flex justify-center mb-4">
             <Image
               src="/house.png"
@@ -136,8 +169,11 @@ function FreeResultContent() {
             </span>
           </div>
           <h1 className="text-3xl font-bold text-[#5c4a3a]">
-            {aiResult?.title || "나의 2025"}
+            {userName ? `${userName}님의 2025` : "나의 2025"}
           </h1>
+          <p className="text-lg text-[#8b7355] mt-2">
+            {aiResult?.title || ""}
+          </p>
         </div>
 
         {/* 2025년 총평 */}
@@ -203,6 +239,11 @@ function FreeResultContent() {
           </p>
         </div>
 
+        <div className="text-center pt-4 pb-2">
+          <p className="text-xs text-[#a89a8a]">2025 연말결산 Free</p>
+        </div>
+        </div>{/* ref 끝 */}
+
         {/* 프리미엄 CTA - 강조 */}
         <div className="felt-card stitch-border p-6 mb-6 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc] border-2 border-[#d4a574]">
           <div className="text-center">
@@ -232,8 +273,16 @@ function FreeResultContent() {
           </div>
         </div>
 
-        {/* 공유 버튼 */}
+        {/* 버튼 영역 */}
         <div className="space-y-3">
+          <button
+            onClick={handleDownloadImage}
+            disabled={isSaving}
+            className="felt-button w-full"
+          >
+            {isSaving ? "저장 중..." : "이미지로 저장하기"}
+          </button>
+
           <button
             onClick={handleShare}
             className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355]
@@ -256,10 +305,6 @@ function FreeResultContent() {
           >
             처음으로
           </a>
-        </div>
-
-        <div className="text-center mt-8">
-          <p className="text-xs text-[#a89a8a]">2025 연말결산 Free</p>
         </div>
       </div>
     </main>

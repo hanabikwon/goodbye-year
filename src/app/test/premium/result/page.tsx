@@ -1,8 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import Image from "next/image";
+import html2canvas from "html2canvas";
 import { premiumQuestions } from "@/data/questions";
 
 interface AIResult {
@@ -23,8 +24,17 @@ function PremiumResultContent() {
   const [isGenerating, setIsGenerating] = useState(true);
   const [aiResult, setAiResult] = useState<AIResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [userName, setUserName] = useState<string>("");
+  const resultRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // localStorage에서 사용자 이름 가져오기
+    const storedName = localStorage.getItem("userName");
+    if (storedName) {
+      setUserName(storedName);
+    }
+
     const data = searchParams.get("data");
     if (data) {
       try {
@@ -81,12 +91,34 @@ function PremiumResultContent() {
   const handleShare = async () => {
     if (navigator.share) {
       await navigator.share({
-        title: "나의 2025 완전체 연말결산",
-        text: "AI가 완전 분석한 내 연말결산을 확인해보세요!",
+        title: "나의 2025 종합 연말결산",
+        text: "AI가 종합 분석한 내 연말결산을 확인해보세요!",
         url: shareUrl,
       });
     } else {
       handleCopyLink();
+    }
+  };
+
+  const handleDownloadImage = async () => {
+    if (!resultRef.current) return;
+
+    setIsSaving(true);
+    try {
+      const canvas = await html2canvas(resultRef.current, {
+        backgroundColor: "#faf6f0",
+        scale: 2,
+        useCORS: true,
+      });
+
+      const link = document.createElement("a");
+      link.download = `2025-연말결산-프리미엄-${Date.now()}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    } catch (e) {
+      console.error("이미지 저장 실패:", e);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -117,7 +149,7 @@ function PremiumResultContent() {
     );
   }
 
-  const keywords = aiResult?.keywords || ["성장", "변화", "도전", "사랑", "희망"];
+  const keywords = aiResult?.keywords || ["성장", "변화", "도전", "사랑", "희망", "감사", "새로움", "용기", "배움", "여유"];
 
   // 새로운 30개 질문 ID 매핑
   // 1: 한 단어, 2: 잘 아는 사람, 3: 그 사람이 보는 나
@@ -130,7 +162,8 @@ function PremiumResultContent() {
   return (
     <main className="min-h-screen py-10 px-4">
       <div className="max-w-md mx-auto">
-        <div className="text-center mb-8">
+        <div ref={resultRef} className="bg-[#faf6f0] pb-6">
+        <div className="text-center mb-8 pt-4">
           <div className="flex justify-center mb-4">
             <Image
               src="/house.png"
@@ -143,8 +176,11 @@ function PremiumResultContent() {
             프리미엄
           </span>
           <h1 className="text-3xl font-bold text-[#5c4a3a] mt-4">
-            {aiResult?.title || "나의 2025 완전 분석"}
+            {userName ? `${userName}님의 2025` : "나의 2025"}
           </h1>
+          <p className="text-lg text-[#8b7355] mt-2">
+            {aiResult?.title || "종합 분석"}
+          </p>
         </div>
 
         {/* 나만의 키워드 */}
@@ -443,18 +479,32 @@ function PremiumResultContent() {
           </div>
         </div>
 
+        <div className="text-center pt-4 pb-2">
+          <p className="text-xs text-[#a89a8a]">2025 연말결산 Premium</p>
+        </div>
+        </div>{/* ref 끝 */}
+
         <div className="space-y-3">
           <button
-            onClick={handleShare}
+            onClick={handleDownloadImage}
+            disabled={isSaving}
             className="felt-button w-full"
+          >
+            {isSaving ? "저장 중..." : "이미지로 저장하기"}
+          </button>
+
+          <button
+            onClick={handleShare}
+            className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355]
+                       hover:bg-[#8b7355] hover:text-white transition-colors"
           >
             결과 공유하기
           </button>
 
           <button
             onClick={handleCopyLink}
-            className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355]
-                       hover:bg-[#8b7355] hover:text-white transition-colors"
+            className="w-full py-3 rounded-full border-2 border-[#8b7355]/50 text-[#8b7355]/70
+                       hover:bg-[#8b7355]/10 transition-colors text-sm"
           >
             {copied ? "복사됨!" : "링크 복사"}
           </button>
@@ -465,10 +515,6 @@ function PremiumResultContent() {
           >
             처음으로
           </a>
-        </div>
-
-        <div className="text-center mt-8">
-          <p className="text-xs text-[#a89a8a]">2025 연말결산 Premium</p>
         </div>
 
         {/* 디버그: 전체 답변 보기 */}

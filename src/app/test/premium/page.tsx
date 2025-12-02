@@ -121,7 +121,7 @@ export default function PremiumTestPage() {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-[#8b7355]">AI 분석</span>
-                <span className="text-[#6b8e6b]">7개 섹션 완전 리포트 + 키워드</span>
+                <span className="text-[#6b8e6b]">7개 섹션 종합 리포트 + 키워드</span>
               </div>
             </div>
           </div>
