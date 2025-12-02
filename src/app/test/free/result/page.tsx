@@ -1,0 +1,219 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+
+interface AIResult {
+  title: string;
+  summary: string;
+  advice: string;
+}
+
+function FreeResultContent() {
+  const searchParams = useSearchParams();
+  const [answers, setAnswers] = useState<Record<number, string>>({});
+  const [copied, setCopied] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(true);
+  const [aiResult, setAiResult] = useState<AIResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const data = searchParams.get("data");
+    if (data) {
+      try {
+        const decoded = JSON.parse(decodeURIComponent(atob(data)));
+        setAnswers(decoded);
+        generateAIResult(decoded);
+      } catch (e) {
+        console.error("Failed to parse data");
+        setError("데이터를 불러올 수 없습니다");
+        setIsGenerating(false);
+      }
+    }
+  }, [searchParams]);
+
+  const generateAIResult = async (answersData: Record<number, string>) => {
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers: answersData, tier: "free" }),
+      });
+
+      if (!response.ok) {
+        throw new Error("AI 생성 실패");
+      }
+
+      const data = await response.json();
+      setAiResult(data.result);
+    } catch (e) {
+      console.error("AI generation failed:", e);
+      setAiResult(null);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const shareUrl = typeof window !== "undefined"
+    ? `${window.location.origin}/view/free?data=${searchParams.get("data")}`
+    : "";
+
+  const handleCopyLink = async () => {
+    await navigator.clipboard.writeText(shareUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      await navigator.share({
+        title: aiResult?.title || "나의 2025 연말결산",
+        text: `${aiResult?.title || "2025년 연말결산"} - AI가 분석한 내 한 해!`,
+        url: shareUrl,
+      });
+    } else {
+      handleCopyLink();
+    }
+  };
+
+  if (isGenerating) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center p-6">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#d4a574] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+          <h2 className="text-xl font-bold text-[#5c4a3a] mb-2">
+            AI가 분석 중이에요
+          </h2>
+          <p className="text-[#8b7355]">
+            당신의 2025년을 정리하고 있어요...
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center p-6">
+        <div className="text-center">
+          <p className="text-[#c45c4a] mb-4">{error}</p>
+          <a href="/" className="felt-button">처음으로</a>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="min-h-screen py-10 px-4">
+      <div className="max-w-md mx-auto">
+        {/* 헤더 */}
+        <div className="text-center mb-8">
+          <div className="flex justify-center gap-2 mb-4">
+            <span className="text-xs text-white bg-[#6b8e6b] px-3 py-1 rounded-full">
+              무료
+            </span>
+            <span className="text-xs text-white bg-[#d4a574] px-3 py-1 rounded-full">
+              AI 분석
+            </span>
+          </div>
+          <h1 className="text-3xl font-bold text-[#5c4a3a]">
+            {aiResult?.title || "나의 2025"}
+          </h1>
+        </div>
+
+        {/* 2025년 총평 */}
+        <div className="felt-card stitch-border p-6 mb-6">
+          <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
+            2025년 총평
+          </h2>
+          <div className="text-center py-4 mb-4">
+            <p className="text-2xl font-bold text-[#5c4a3a]">"{answers[1] || "성장"}"</p>
+            <p className="text-sm text-[#8b7355] mt-1">당신이 정의한 2025년</p>
+          </div>
+          <p className="text-[#5c4a3a] leading-relaxed">
+            {aiResult?.summary || "올해도 수고했어요."}
+          </p>
+        </div>
+
+        {/* 한줄 조언 */}
+        <div className="felt-card stitch-border p-6 mb-6 bg-[#6b8e6b]/10">
+          <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
+            2026년을 위한 한마디
+          </h2>
+          <p className="text-[#5c4a3a] leading-relaxed text-center text-lg">
+            "{aiResult?.advice || "2026년도 당신답게!"}"
+          </p>
+        </div>
+
+        {/* 프리미엄 CTA - 강조 */}
+        <div className="felt-card stitch-border p-6 mb-6 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc] border-2 border-[#d4a574]">
+          <div className="text-center">
+            <p className="text-lg font-bold text-[#5c4a3a] mb-2">
+              더 깊이 알고 싶다면?
+            </p>
+            <p className="text-sm text-[#8b7355] mb-4">
+              프리미엄에서는 감정 분석, 관계, 성장,<br />
+              취향/나다움 분석까지!
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 text-xs text-[#8b7355] mb-4">
+              <span className="bg-white/50 px-2 py-1 rounded-full">감정 분석</span>
+              <span className="bg-white/50 px-2 py-1 rounded-full">관계 돌아보기</span>
+              <span className="bg-white/50 px-2 py-1 rounded-full">성장 포인트</span>
+              <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">취향</span>
+              <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">나다움</span>
+              <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">나만의 키워드</span>
+            </div>
+            <a
+              href="/test/premium"
+              className="felt-button inline-block"
+            >
+              프리미엄 분석 받기 - 2,900원
+            </a>
+          </div>
+        </div>
+
+        {/* 공유 버튼 */}
+        <div className="space-y-3">
+          <button
+            onClick={handleShare}
+            className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355]
+                       hover:bg-[#8b7355] hover:text-white transition-colors font-medium"
+          >
+            결과 공유하기
+          </button>
+
+          <button
+            onClick={handleCopyLink}
+            className="w-full py-3 rounded-full border-2 border-[#8b7355]/50 text-[#8b7355]/70
+                       hover:bg-[#8b7355]/10 transition-colors text-sm"
+          >
+            {copied ? "복사됨!" : "링크 복사"}
+          </button>
+
+          <a
+            href="/"
+            className="block text-center py-3 text-[#8b7355] hover:underline"
+          >
+            처음으로
+          </a>
+        </div>
+
+        <div className="text-center mt-8">
+          <p className="text-xs text-[#a89a8a]">2025 연말결산 Free</p>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default function FreeResultPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-[#8b7355]">로딩중...</div>
+      </div>
+    }>
+      <FreeResultContent />
+    </Suspense>
+  );
+}

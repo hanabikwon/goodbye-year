@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --felt-cream: #f5e6d3;
+  --felt-brown: #8b7355;
+  --felt-dark: #5c4a3a;
+  --felt-warm: #d4a574;
+  --felt-red: #c45c4a;
+  --felt-green: #6b8e6b;
+}
+
+@theme inline {
+  --color-felt-cream: var(--felt-cream);
+  --color-felt-brown: var(--felt-brown);
+  --color-felt-dark: var(--felt-dark);
+  --color-felt-warm: var(--felt-warm);
+  --color-felt-red: var(--felt-red);
+  --color-felt-green: var(--felt-green);
+}
+
+body {
+  background: var(--felt-cream);
+  color: var(--felt-dark);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 펠트 질감 효과 */
+.felt-texture {
+  background-color: var(--felt-cream);
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+/* 스티치 테두리 */
+.stitch-border {
+  border: 3px dashed var(--felt-brown);
+  border-radius: 12px;
+  position: relative;
+}
+
+.stitch-border::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 2px dotted var(--felt-warm);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+/* 카드 그림자 */
+.felt-card {
+  background: linear-gradient(145deg, #faf0e6, #ede0cc);
+  box-shadow:
+    4px 4px 0 var(--felt-brown),
+    inset 0 0 30px rgba(139, 115, 85, 0.1);
+  border-radius: 16px;
+}
+
+/* 버튼 스타일 */
+.felt-button {
+  background: var(--felt-warm);
+  color: white;
+  border: 2px solid var(--felt-brown);
+  border-radius: 25px;
+  padding: 12px 32px;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 3px 3px 0 var(--felt-dark);
+}
+
+.felt-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--felt-dark);
+}
+
+.felt-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--felt-dark);
+}
+
+/* 애니메이션 */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
