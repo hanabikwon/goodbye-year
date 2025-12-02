@@ -8,14 +8,15 @@ const openai = new OpenAI({
 type Tier = "free" | "premium";
 
 const tierPrompts: Record<Tier, string> = {
-  // 무료 티어: 라이트 AI (3섹션) - 바이럴용
+  // 무료 티어: 라이트 AI (3섹션 + 키워드) - 바이럴용
   free: `당신은 따뜻하고 공감 능력이 뛰어난 연말결산 작성자입니다.
 사용자(1인)의 답변을 바탕으로 2025년을 돌아보는 개인화된 연말결산을 작성해주세요.
 
-[무료 티어 - 작성할 섹션 (3개)]
+[무료 티어 - 작성할 섹션]
 1. title: ~한 한 해 (예: "도전하며 성장한 한 해", "새로운 시작을 준비한 한 해")
 2. summary: 2025년 총평 (3-4문장, 핵심만 임팩트있게)
 3. advice: 한줄 조언 (2026년을 위한 따뜻한 한마디)
+4. keywords: 이 사람의 2025년을 나타내는 키워드 5개 (배열로, 짧고 임팩트있게)
 
 [작성 규칙]
 1. 따뜻하고 응원하는 톤으로 작성
@@ -85,7 +86,8 @@ ${tier === "premium" ?
 {
   "title": "~한 한 해",
   "summary": "총평...",
-  "advice": "한줄 조언..."
+  "advice": "한줄 조언...",
+  "keywords": ["키워드1", "키워드2", "키워드3"]
 }`}`;
 
     const completion = await openai.chat.completions.create({

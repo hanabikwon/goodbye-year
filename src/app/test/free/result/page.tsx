@@ -7,6 +7,7 @@ interface AIResult {
   title: string;
   summary: string;
   advice: string;
+  keywords: string[];
 }
 
 function FreeResultContent() {
@@ -135,6 +136,37 @@ function FreeResultContent() {
           </p>
         </div>
 
+        {/* 나의 키워드 - 워드클라우드 스타일 */}
+        {aiResult?.keywords && aiResult.keywords.length > 0 && (
+          <div className="felt-card stitch-border p-6 mb-6">
+            <h2 className="text-lg font-bold text-[#5c4a3a] mb-4 text-center">
+              나의 2025 키워드
+            </h2>
+            <div className="flex flex-wrap justify-center items-center gap-3 py-4">
+              {aiResult.keywords.map((keyword, index) => {
+                // 워드클라우드 스타일: 다양한 크기와 색상
+                const sizes = ["text-xl", "text-2xl", "text-lg", "text-xl", "text-lg"];
+                const colors = [
+                  "text-[#d4a574]",
+                  "text-[#5c4a3a]",
+                  "text-[#6b8e6b]",
+                  "text-[#8b7355]",
+                  "text-[#c4956a]"
+                ];
+                const rotations = ["rotate-[-3deg]", "rotate-[2deg]", "rotate-[-1deg]", "rotate-[3deg]", "rotate-[-2deg]"];
+                return (
+                  <span
+                    key={index}
+                    className={`font-bold ${sizes[index % 5]} ${colors[index % 5]} ${rotations[index % 5]} transform transition-transform hover:scale-110`}
+                  >
+                    #{keyword}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* 한줄 조언 */}
         <div className="felt-card stitch-border p-6 mb-6 bg-[#6b8e6b]/10">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
@@ -161,8 +193,10 @@ function FreeResultContent() {
               <span className="bg-white/50 px-2 py-1 rounded-full">성장 포인트</span>
               <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">취향</span>
               <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">나다움</span>
-              <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">나만의 키워드</span>
             </div>
+            <p className="text-xs text-[#6b8e6b] mb-4">
+              + 질문과 답변 전체 확인 및 저장 가능!
+            </p>
             <a
               href="/test/premium"
               className="felt-button inline-block"
