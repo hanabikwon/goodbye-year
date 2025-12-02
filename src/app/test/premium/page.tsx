@@ -56,7 +56,7 @@ export default function PremiumTestPage() {
               종합 분석 테스트
             </h1>
             <p className="text-[#8b7355]">
-              50개 질문으로 나의 모든 것을 분석하기
+              30개 질문으로 나의 2025년 총정리
             </p>
           </div>
 
@@ -66,49 +66,42 @@ export default function PremiumTestPage() {
                 <div className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">1</div>
                 <div>
                   <p className="font-medium text-[#5c4a3a]">올해의 나</p>
-                  <p className="text-sm text-[#8b7355]">4개 질문</p>
+                  <p className="text-sm text-[#8b7355]">3개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">2</div>
                 <div>
                   <p className="font-medium text-[#5c4a3a]">감정과 내면</p>
-                  <p className="text-sm text-[#8b7355]">7개 질문</p>
+                  <p className="text-sm text-[#8b7355]">3개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">3</div>
                 <div>
                   <p className="font-medium text-[#5c4a3a]">관계</p>
-                  <p className="text-sm text-[#8b7355]">6개 질문</p>
+                  <p className="text-sm text-[#8b7355]">3개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">4</div>
                 <div>
                   <p className="font-medium text-[#5c4a3a]">성장과 변화</p>
-                  <p className="text-sm text-[#8b7355]">8개 질문</p>
+                  <p className="text-sm text-[#8b7355]">6개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">5</div>
                 <div>
-                  <p className="font-medium text-[#5c4a3a]">나다움</p>
-                  <p className="text-sm text-[#8b7355]">17개 질문</p>
+                  <p className="font-medium text-[#5c4a3a]">나다움/취향</p>
+                  <p className="text-sm text-[#8b7355]">12개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">6</div>
                 <div>
                   <p className="font-medium text-[#5c4a3a]">미래의 나</p>
-                  <p className="text-sm text-[#8b7355]">4개 질문</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/50 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">7</div>
-                <div>
-                  <p className="font-medium text-[#5c4a3a]">마무리</p>
-                  <p className="text-sm text-[#8b7355]">4개 질문</p>
+                  <p className="text-sm text-[#8b7355]">3개 질문</p>
                 </div>
               </div>
             </div>
@@ -116,7 +109,7 @@ export default function PremiumTestPage() {
             <div className="pt-4 border-t border-[#d4a574]/30 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-[#8b7355]">예상 소요시간</span>
-                <span className="text-[#5c4a3a]">약 20분</span>
+                <span className="text-[#5c4a3a]">약 15분</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-[#8b7355]">AI 분석</span>
