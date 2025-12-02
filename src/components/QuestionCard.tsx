@@ -71,25 +71,6 @@ export default function QuestionCard({
           </div>
         )}
 
-        {/* 이모지 선택 */}
-        {question.type === "emoji" && question.options && (
-          <div className="grid grid-cols-4 gap-3">
-            {question.options.map((emoji, index) => (
-              <button
-                key={index}
-                onClick={() => onAnswer(emoji)}
-                className={`text-4xl p-4 rounded-xl transition-all
-                  ${
-                    answer === emoji
-                      ? "bg-[#d4a574] scale-110 shadow-lg"
-                      : "bg-white/50 hover:bg-white/80"
-                  }`}
-              >
-                {emoji}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
