@@ -61,7 +61,7 @@ export default function StandardTestPage() {
               핵심 분석 테스트
             </h1>
             <p className="text-[#8b7355]">
-              20개 질문으로 나를 깊이 들여다보기
+              12개 질문으로 나를 깊이 들여다보기
             </p>
           </div>
 
@@ -71,42 +71,35 @@ export default function StandardTestPage() {
                 <div className="w-8 h-8 rounded-full bg-[#d4a574]/20 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">1</div>
                 <div>
                   <p className="font-medium text-[#5c4a3a]">올해의 나</p>
-                  <p className="text-sm text-[#8b7355]">3개 질문</p>
+                  <p className="text-sm text-[#8b7355]">2개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-[#d4a574]/20 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">2</div>
                 <div>
-                  <p className="font-medium text-[#5c4a3a]">감정과 내면</p>
-                  <p className="text-sm text-[#8b7355]">4개 질문</p>
+                  <p className="font-medium text-[#5c4a3a]">감정</p>
+                  <p className="text-sm text-[#8b7355]">3개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-[#d4a574]/20 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">3</div>
                 <div>
                   <p className="font-medium text-[#5c4a3a]">관계</p>
-                  <p className="text-sm text-[#8b7355]">4개 질문</p>
+                  <p className="text-sm text-[#8b7355]">2개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-[#d4a574]/20 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">4</div>
                 <div>
-                  <p className="font-medium text-[#5c4a3a]">성장과 변화</p>
-                  <p className="text-sm text-[#8b7355]">4개 질문</p>
+                  <p className="font-medium text-[#5c4a3a]">성장</p>
+                  <p className="text-sm text-[#8b7355]">2개 질문</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-[#d4a574]/20 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">5</div>
                 <div>
-                  <p className="font-medium text-[#5c4a3a]">미래의 나</p>
+                  <p className="font-medium text-[#5c4a3a]">미래</p>
                   <p className="text-sm text-[#8b7355]">3개 질문</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#d4a574]/20 flex items-center justify-center text-sm font-bold text-[#5c4a3a]">6</div>
-                <div>
-                  <p className="font-medium text-[#5c4a3a]">마무리</p>
-                  <p className="text-sm text-[#8b7355]">2개 질문</p>
                 </div>
               </div>
             </div>
@@ -114,7 +107,7 @@ export default function StandardTestPage() {
             <div className="pt-4 border-t border-[#d4a574]/30 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-[#8b7355]">예상 소요시간</span>
-                <span className="text-[#5c4a3a]">약 7분</span>
+                <span className="text-[#5c4a3a]">약 4분</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-[#8b7355]">AI 분석</span>

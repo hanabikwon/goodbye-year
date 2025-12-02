@@ -41,9 +41,9 @@ export default function Home() {
               <p className="text-2xl font-bold text-[#6b8e6b]">무료</p>
             </div>
             <div className="flex flex-wrap gap-2 text-sm text-[#8b7355] mb-3">
-              <span>20개 질문</span>
+              <span>12개 질문</span>
               <span>•</span>
-              <span>약 7분</span>
+              <span>약 4분</span>
               <span>•</span>
               <span className="text-[#6b8e6b]">라이트 AI 분석</span>
             </div>
@@ -57,7 +57,7 @@ export default function Home() {
             </div>
             <div className="space-y-1 text-sm text-[#8b7355] italic mt-3 pt-3 border-t border-[#d4a574]/30">
               <p>"올해 가장 고마웠던 사람은?"</p>
-              <p>"올해 나를 성장시킨 경험은?"</p>
+              <p>"1년 전의 나에게 해주고 싶은 말은?"</p>
               <p>"내년에 꼭 하고 싶은 것 하나는?"</p>
             </div>
           </div>
@@ -82,9 +82,9 @@ export default function Home() {
               <p className="text-2xl font-bold text-[#5c4a3a]">2,900원</p>
             </div>
             <div className="flex flex-wrap gap-2 text-sm text-[#8b7355] mb-3">
-              <span>50개 질문</span>
+              <span>30개 질문</span>
               <span>•</span>
-              <span>약 20분</span>
+              <span>약 15분</span>
               <span>•</span>
               <span className="text-[#6b8e6b]">풀 AI 분석</span>
             </div>
@@ -109,10 +109,10 @@ export default function Home() {
               </span>
             </div>
             <div className="space-y-1 text-sm text-[#8b7355] italic mt-3 pt-3 border-t border-[#d4a574]/30">
-              <p>"혼자 있을 때 주로 무슨 생각을 했나?"</p>
-              <p>"안정 vs 도전, 당신의 선택은?"</p>
+              <p>"그때는 좋았는데 지금은 매력이 없어 보이는 무언가?"</p>
+              <p>"나만의 길티 플레져가 있다면?"</p>
               <p>"올해 가장 잘한 소비는?"</p>
-              <p>"올해 새롭게 빠진 취미나 관심사가 있다면?"</p>
+              <p>"내년 이맘때 나는 어디에서 무엇을 하고 있을까?"</p>
             </div>
           </div>
         </div>

@@ -271,7 +271,7 @@ function StandardResultContent() {
         <div className="felt-card stitch-border p-6 mb-6 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc]">
           <div className="text-center">
             <p className="text-lg font-bold text-[#5c4a3a] mb-2">
-              완전체 분석이 궁금하다면?
+              심층 분석이 궁금하다면?
             </p>
             <p className="text-sm text-[#8b7355] mb-4">
               프리미엄에서는 취향 분석, 나만의 키워드까지!

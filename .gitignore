@@ -45,3 +45,5 @@ conversation-*.txt
 
 # planning docs (optional)
 PLAN.md
+playwright-report/
+test-results/
