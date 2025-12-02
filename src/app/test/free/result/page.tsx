@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import { standardQuestions } from "@/data/questions";
 
 interface AIResult {
   title: string;
@@ -36,10 +37,17 @@ function FreeResultContent() {
 
   const generateAIResult = async (answersData: Record<number, string>) => {
     try {
+      // 질문과 답변을 매핑해서 전송
+      const questionsWithAnswers = standardQuestions.map((q) => ({
+        question: q.question,
+        answer: answersData[q.id] || "",
+        category: q.category,
+      })).filter(qa => qa.answer); // 답변이 있는 것만
+
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers: answersData, tier: "free" }),
+        body: JSON.stringify({ answers: questionsWithAnswers, tier: "free" }),
       });
 
       if (!response.ok) {
