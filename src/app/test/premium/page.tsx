@@ -48,14 +48,22 @@ export default function PremiumTestPage() {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="max-w-md w-full">
+          {/* 뒤로가기 */}
+          <button
+            onClick={() => router.push("/select")}
+            className="text-sm text-[#a89a8a] hover:text-[#6b5d4d] mb-6 flex items-center gap-1"
+          >
+            <span>←</span> 요금제 선택
+          </button>
+
           <div className="text-center mb-8">
-            <span className="text-xs text-white bg-[#5c4a3a] px-3 py-1 rounded-full">
+            <span className="text-xs text-white bg-[#b8956b] px-3 py-1 rounded-full">
               프리미엄
             </span>
-            <h1 className="text-3xl font-bold text-[#5c4a3a] mt-4 mb-2">
+            <h1 className="text-3xl font-bold text-[#6b5d4d] mt-4 mb-2">
               종합 분석 테스트
             </h1>
-            <p className="text-[#8b7355]">
+            <p className="text-[#a89a8a]">
               30개 질문으로 나의 2025년 총정리
             </p>
           </div>
@@ -124,16 +132,9 @@ export default function PremiumTestPage() {
           >
             시작하기 - 2,900원
           </button>
-          <p className="text-center text-xs text-[#a89a8a] mt-3">
+          <p className="text-center text-xs text-[#b8afa3] mt-3">
             * 현재 테스트 버전입니다
           </p>
-
-          <a
-            href="/"
-            className="block text-center mt-6 text-[#8b7355] hover:underline"
-          >
-            다른 티어 선택하기
-          </a>
         </div>
       </main>
     );
@@ -156,11 +157,19 @@ export default function PremiumTestPage() {
       />
 
       <div className="flex gap-4 mt-8">
-        {currentQuestion > 0 && (
+        {currentQuestion === 0 ? (
+          <button
+            onClick={() => setStarted(false)}
+            className="px-6 py-3 rounded-full border-2 border-[#a89a8a] text-[#a89a8a]
+                       hover:bg-[#a89a8a] hover:text-white transition-colors"
+          >
+            나가기
+          </button>
+        ) : (
           <button
             onClick={handlePrev}
-            className="px-6 py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355]
-                       hover:bg-[#8b7355] hover:text-white transition-colors"
+            className="px-6 py-3 rounded-full border-2 border-[#a89a8a] text-[#a89a8a]
+                       hover:bg-[#a89a8a] hover:text-white transition-colors"
           >
             이전
           </button>

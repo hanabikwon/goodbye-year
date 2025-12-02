@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Question } from "@/data/questions";
 
 interface QuestionCardProps {
@@ -19,6 +20,17 @@ export default function QuestionCard({
 }: QuestionCardProps) {
   return (
     <div className="fade-in w-full max-w-md mx-auto">
+      {/* 집 아이콘 */}
+      <div className="flex justify-center mb-4">
+        <Image
+          src="/house.png"
+          alt="집 아이콘"
+          width={72}
+          height={72}
+          className="opacity-80"
+        />
+      </div>
+
       {/* 진행 상태 */}
       <div className="mb-6">
         <div className="flex justify-between text-sm text-[#8b7355] mb-2">

@@ -1,125 +1,81 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { tierPricing } from "@/data/questions";
+import Image from "next/image";
 
-export default function Home() {
+export default function IntroPage() {
   const router = useRouter();
+  const [name, setName] = useState("");
+
+  const handleStart = () => {
+    if (name.trim()) {
+      // 이름을 localStorage에 저장하고 요금제 선택 페이지로 이동
+      localStorage.setItem("userName", name.trim());
+      router.push("/select");
+    }
+  };
 
   return (
-    <main className="min-h-screen py-10 px-4">
-      <div className="max-w-lg mx-auto">
-        {/* 헤더 */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-[#5c4a3a] mb-3">
-            2025 연말결산
+    <main className="min-h-screen flex flex-col items-center justify-center p-6">
+      <div className="max-w-md w-full text-center">
+        {/* 자수 집 이미지 */}
+        <div className="mb-8 fade-in">
+          <Image
+            src="/house.png"
+            alt="손바느질 집"
+            width={240}
+            height={240}
+            className="mx-auto"
+          />
+        </div>
+
+        {/* 인트로 문구 */}
+        <div className="mb-10 fade-in" style={{ animationDelay: "0.2s" }}>
+          <h1 className="text-2xl font-medium text-[#6b5d4d] leading-relaxed mb-4">
+            2025년을 돌아볼 시간이에요.
           </h1>
-          <p className="text-[#8b7355]">
-            AI가 분석해주는 나만의 한 해 돌아보기
+          <p className="text-[#a89a8a] leading-relaxed">
+            바쁘게 달려온 당신,<br />
+            잠시 멈춰서 한 해를 돌아볼 시간.
           </p>
         </div>
 
-        {/* 2티어 카드들 */}
-        <div className="space-y-4">
-          {/* 무료 (라이트 AI) */}
-          <div
-            onClick={() => router.push("/test/free")}
-            className="felt-card stitch-border p-5 cursor-pointer hover:scale-[1.02] transition-transform border-2 border-[#d4a574]"
-          >
-            <div className="flex justify-between items-start mb-3">
-              <div>
-                <span className="text-xs text-white bg-[#6b8e6b] px-2 py-0.5 rounded-full">
-                  무료
-                </span>
-                <span className="text-xs text-white bg-[#d4a574] px-2 py-0.5 rounded-full ml-1">
-                  AI 분석
-                </span>
-                <h3 className="text-xl font-bold text-[#5c4a3a] mt-2">
-                  핵심 분석 테스트
-                </h3>
-              </div>
-              <p className="text-2xl font-bold text-[#6b8e6b]">무료</p>
-            </div>
-            <div className="flex flex-wrap gap-2 text-sm text-[#8b7355] mb-3">
-              <span>12개 질문</span>
-              <span>•</span>
-              <span>약 4분</span>
-              <span>•</span>
-              <span className="text-[#6b8e6b]">라이트 AI 분석</span>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              <span className="text-xs bg-white/50 text-[#8b7355] px-2 py-0.5 rounded-full">
-                2025년 총평
-              </span>
-              <span className="text-xs bg-white/50 text-[#8b7355] px-2 py-0.5 rounded-full">
-                2026 조언
-              </span>
-            </div>
-            <div className="space-y-1 text-sm text-[#8b7355] italic mt-3 pt-3 border-t border-[#d4a574]/30">
-              <p>"올해 가장 고마웠던 사람은?"</p>
-              <p>"1년 전의 나에게 해주고 싶은 말은?"</p>
-              <p>"내년에 꼭 하고 싶은 것 하나는?"</p>
-            </div>
-          </div>
-
-          {/* 프리미엄 (풀 AI) */}
-          <div
-            onClick={() => router.push("/test/premium")}
-            className="felt-card stitch-border p-5 cursor-pointer hover:scale-[1.02] transition-transform bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc]"
-          >
-            <div className="flex justify-between items-start mb-3">
-              <div>
-                <span className="text-xs text-white bg-[#5c4a3a] px-2 py-0.5 rounded-full">
-                  프리미엄
-                </span>
-                <span className="text-xs text-white bg-[#d4a574] px-2 py-0.5 rounded-full ml-1">
-                  AI 분석
-                </span>
-                <h3 className="text-xl font-bold text-[#5c4a3a] mt-2">
-                  종합 분석 테스트
-                </h3>
-              </div>
-              <p className="text-2xl font-bold text-[#5c4a3a]">2,900원</p>
-            </div>
-            <div className="flex flex-wrap gap-2 text-sm text-[#8b7355] mb-3">
-              <span>30개 질문</span>
-              <span>•</span>
-              <span>약 15분</span>
-              <span>•</span>
-              <span className="text-[#6b8e6b]">풀 AI 분석</span>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              <span className="text-xs bg-white/50 text-[#8b7355] px-2 py-0.5 rounded-full">
-                2025년 총평
-              </span>
-              <span className="text-xs bg-white/50 text-[#8b7355] px-2 py-0.5 rounded-full">
-                감정 분석
-              </span>
-              <span className="text-xs bg-white/50 text-[#8b7355] px-2 py-0.5 rounded-full">
-                관계 돌아보기
-              </span>
-              <span className="text-xs bg-white/50 text-[#8b7355] px-2 py-0.5 rounded-full">
-                성장 포인트
-              </span>
-              <span className="text-xs bg-[#6b8e6b]/20 text-[#6b8e6b] px-2 py-0.5 rounded-full">
-                취향
-              </span>
-              <span className="text-xs bg-[#6b8e6b]/20 text-[#6b8e6b] px-2 py-0.5 rounded-full">
-                나다움
-              </span>
-            </div>
-            <div className="space-y-1 text-sm text-[#8b7355] italic mt-3 pt-3 border-t border-[#d4a574]/30">
-              <p>"그때는 좋았는데 지금은 매력이 없어 보이는 무언가?"</p>
-              <p>"나만의 길티 플레져가 있다면?"</p>
-              <p>"올해 가장 잘한 소비는?"</p>
-              <p>"내년 이맘때 나는 어디에서 무엇을 하고 있을까?"</p>
-            </div>
-          </div>
+        {/* 이름 입력 카드 */}
+        <div
+          className="felt-card stitch-border p-6 mb-6 fade-in"
+          style={{ animationDelay: "0.4s" }}
+        >
+          <label className="block text-sm text-[#a89a8a] mb-3">
+            당신의 이름을 알려주세요
+          </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="이름 또는 닉네임"
+            className="w-full p-4 rounded-xl border-2 border-dashed border-[#d5cdc2] bg-white/30
+                       focus:outline-none focus:border-[#c9a882] text-center text-lg text-[#6b5d4d]
+                       placeholder:text-[#b8afa3]"
+            onKeyDown={(e) => e.key === "Enter" && handleStart()}
+          />
         </div>
 
-        {/* 안내 */}
-        <p className="text-center text-xs text-[#a89a8a] mt-6">
-          프리미엄은 Buy Me a Coffee를 통해 결제됩니다
+        {/* 시작 버튼 */}
+        <button
+          onClick={handleStart}
+          disabled={!name.trim()}
+          className={`felt-button w-full text-lg fade-in ${
+            !name.trim() ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          style={{ animationDelay: "0.6s" }}
+        >
+          시작하기
+        </button>
+
+        {/* 하단 안내 */}
+        <p className="text-xs text-[#b8afa3] mt-6 fade-in" style={{ animationDelay: "0.8s" }}>
+          AI가 분석해주는 나만의 2025 연말결산
         </p>
       </div>
     </main>

@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import Image from "next/image";
 
 interface AIResult {
   title: string;
@@ -110,6 +111,14 @@ function StandardResultContent() {
     <main className="min-h-screen py-10 px-4">
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <Image
+              src="/house.png"
+              alt="집 아이콘"
+              width={100}
+              height={100}
+            />
+          </div>
           <div className="flex justify-center gap-2 mb-4">
             <span className="text-xs text-white bg-[#c45c4a] px-3 py-1 rounded-full">
               인기
@@ -226,7 +235,7 @@ function StandardResultContent() {
         {/* 2026년 조언 */}
         <div className="felt-card stitch-border p-6 mb-6 bg-[#6b8e6b]/10">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            2026년을 향한 조언
+            2026년을 향한 응원
           </h2>
 
           {answers[16] && (

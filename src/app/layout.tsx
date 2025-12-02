@@ -21,7 +21,7 @@ export default function RootLayout({
       <head>
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+          href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
         />
       </head>
       <body className="felt-texture min-h-screen">

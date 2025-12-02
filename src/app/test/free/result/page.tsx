@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import Image from "next/image";
 import { standardQuestions } from "@/data/questions";
 
 interface AIResult {
@@ -118,6 +119,14 @@ function FreeResultContent() {
       <div className="max-w-md mx-auto">
         {/* 헤더 */}
         <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <Image
+              src="/house.png"
+              alt="집 아이콘"
+              width={100}
+              height={100}
+            />
+          </div>
           <div className="flex justify-center gap-2 mb-4">
             <span className="text-xs text-white bg-[#6b8e6b] px-3 py-1 rounded-full">
               무료

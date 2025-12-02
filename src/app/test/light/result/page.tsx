@@ -202,7 +202,7 @@ function LightResultContent() {
               더 깊이 알고 싶다면?
             </p>
             <p className="text-sm text-[#8b7355] mb-4">
-              스탠다드에서는 관계, 성장, 2026 맞춤 조언까지!
+              스탠다드에서는 관계, 성장, 2026 응원까지!
             </p>
             <a
               href="/test/standard"
