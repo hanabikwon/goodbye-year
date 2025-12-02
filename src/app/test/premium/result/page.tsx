@@ -152,12 +152,8 @@ function PremiumResultContent() {
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             2025년 총평
           </h2>
-          <div className="text-center py-4 mb-4">
-            <p className="text-2xl font-bold text-[#5c4a3a]">"{answers[1] || "성장"}"</p>
-            <p className="text-sm text-[#8b7355] mt-1">당신이 정의한 2025년</p>
-          </div>
           <p className="text-[#5c4a3a] leading-relaxed">
-            {aiResult?.summary || `올해 당신은 "${answers[5] || "어떤 사람"}"이었어요. 그 모든 순간이 지금의 당신을 만들었어요.`}
+            {aiResult?.summary || "올해도 정말 수고했어요."}
           </p>
         </div>
 
@@ -167,38 +163,31 @@ function PremiumResultContent() {
             감정 돌아보기
           </h2>
 
-          {answers[6] && (
+          {answers[5] && (
             <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#6b8e6b] mb-1">가장 행복했던 순간</p>
+              <p className="text-[#5c4a3a]">"{answers[5]}"</p>
+            </div>
+          )}
+
+          {answers[6] && (
+            <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
+              <p className="text-sm text-[#c45c4a] mb-1">가장 힘들었던 순간</p>
               <p className="text-[#5c4a3a]">"{answers[6]}"</p>
             </div>
           )}
 
-          {answers[7] && (
-            <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#c45c4a] mb-1">가장 힘들었던 순간</p>
-              <p className="text-[#5c4a3a]">"{answers[7]}"</p>
-            </div>
-          )}
-
-          {answers[8] && (
-            <div className="bg-[#f5d742]/20 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">가장 웃긴 일</p>
-              <p className="text-[#5c4a3a]">"{answers[8]}"</p>
-            </div>
-          )}
-
-          {answers[12] && (
+          {answers[10] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">울게 만든 것</p>
-              <p className="text-[#5c4a3a]">"{answers[12]}"</p>
+              <p className="text-[#5c4a3a]">"{answers[10]}"</p>
             </div>
           )}
 
-          {answers[13] && (
+          {answers[11] && (
             <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#c45c4a] mb-1">화나게 한 것</p>
-              <p className="text-[#5c4a3a]">"{answers[13]}"</p>
+              <p className="text-[#5c4a3a]">"{answers[11]}"</p>
             </div>
           )}
 
@@ -213,24 +202,24 @@ function PremiumResultContent() {
             소중한 관계
           </h2>
 
-          {answers[14] && (
+          {answers[12] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">올해 가장 고마운 사람</p>
-              <p className="text-[#5c4a3a] font-medium">{answers[14]}</p>
+              <p className="text-[#5c4a3a] font-medium">{answers[12]}</p>
             </div>
           )}
 
-          {answers[18] && (
+          {answers[16] && (
             <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#6b8e6b] mb-1">새롭게 소중해진 사람</p>
-              <p className="text-[#5c4a3a]">{answers[18]}</p>
+              <p className="text-[#5c4a3a]">{answers[16]}</p>
             </div>
           )}
 
-          {answers[15] && (
+          {answers[13] && (
             <div className="bg-[#d4a574]/20 rounded-xl p-4 border-2 border-dashed border-[#d4a574]">
               <p className="text-sm text-[#8b7355] mb-1">전하지 못한 말</p>
-              <p className="text-[#5c4a3a] italic">"{answers[15]}"</p>
+              <p className="text-[#5c4a3a] italic">"{answers[13]}"</p>
             </div>
           )}
 
@@ -247,38 +236,38 @@ function PremiumResultContent() {
             성장 포인트
           </h2>
 
-          {answers[20] && (
+          {answers[18] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">가장 큰 변화</p>
+              <p className="text-[#5c4a3a]">{answers[18]}</p>
+            </div>
+          )}
+
+          {answers[20] && (
+            <div className="bg-white/50 rounded-xl p-4 mb-3">
+              <p className="text-sm text-[#8b7355] mb-1">새롭게 시작한 것</p>
               <p className="text-[#5c4a3a]">{answers[20]}</p>
             </div>
           )}
 
-          {answers[22] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">새롭게 시작한 것</p>
-              <p className="text-[#5c4a3a]">{answers[22]}</p>
-            </div>
-          )}
-
-          {answers[25] && (
+          {answers[23] && (
             <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#6b8e6b] mb-1">완주한 것</p>
-              <p className="text-[#5c4a3a]">{answers[25]}</p>
+              <p className="text-[#5c4a3a]">{answers[23]}</p>
             </div>
           )}
 
-          {answers[26] && (
+          {answers[24] && (
             <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#c45c4a] mb-1">도전했다가 실패한 것</p>
-              <p className="text-[#5c4a3a]">{answers[26]}</p>
+              <p className="text-[#5c4a3a]">{answers[24]}</p>
             </div>
           )}
 
-          {answers[21] && (
+          {answers[19] && (
             <div className="bg-[#d4a574]/20 rounded-xl p-4 border-2 border-dashed border-[#d4a574]">
               <p className="text-sm text-[#8b7355] mb-1">1년 전 나에게</p>
-              <p className="text-[#5c4a3a] italic">"{answers[21]}"</p>
+              <p className="text-[#5c4a3a] italic">"{answers[19]}"</p>
             </div>
           )}
 
@@ -295,96 +284,66 @@ function PremiumResultContent() {
             취향과 문화
           </h2>
 
-          {answers[28] && (
+          {answers[26] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">기억에 남는 영화/드라마</p>
-              <p className="text-[#5c4a3a]">{answers[28]}</p>
+              <p className="text-[#5c4a3a]">{answers[26]}</p>
             </div>
           )}
 
-          {answers[38] && (
+          {answers[27] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">영화관에서 본 최고의 영화</p>
-              <p className="text-[#5c4a3a]">{answers[38]}</p>
+              <p className="text-sm text-[#8b7355] mb-1">많이 들은 노래/아티스트</p>
+              <p className="text-[#5c4a3a]">{answers[27]}</p>
+            </div>
+          )}
+
+          {answers[35] && (
+            <div className="bg-white/50 rounded-xl p-4 mb-3">
+              <p className="text-sm text-[#8b7355] mb-1">나를 위로해준 콘텐츠</p>
+              <p className="text-[#5c4a3a]">{answers[35]}</p>
+            </div>
+          )}
+
+          {answers[28] && (
+            <div className="bg-white/50 rounded-xl p-4 mb-3">
+              <p className="text-sm text-[#8b7355] mb-1">기억에 남는 책</p>
+              <p className="text-[#5c4a3a]">{answers[28]}</p>
             </div>
           )}
 
           {answers[29] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">많이 들은 노래/아티스트</p>
+              <p className="text-sm text-[#8b7355] mb-1">좋았던 장소/공간</p>
               <p className="text-[#5c4a3a]">{answers[29]}</p>
             </div>
           )}
 
-          {answers[41] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">나를 위로해준 콘텐츠</p>
-              <p className="text-[#5c4a3a]">{answers[41]}</p>
-            </div>
-          )}
-
           {answers[30] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">기억에 남는 책</p>
+            <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
+              <p className="text-sm text-[#6b8e6b] mb-1">다녀온 여행지 중 최고</p>
               <p className="text-[#5c4a3a]">{answers[30]}</p>
             </div>
           )}
 
           {answers[31] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">좋았던 장소/공간</p>
+              <p className="text-sm text-[#8b7355] mb-1">가장 맛있게 먹은 것</p>
               <p className="text-[#5c4a3a]">{answers[31]}</p>
             </div>
           )}
 
           {answers[32] && (
-            <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#6b8e6b] mb-1">다녀온 여행지 중 최고</p>
+            <div className="bg-white/50 rounded-xl p-4 mb-3">
+              <p className="text-sm text-[#8b7355] mb-1">가장 잘한 소비</p>
               <p className="text-[#5c4a3a]">{answers[32]}</p>
             </div>
           )}
 
-          {answers[40] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">가장 많이 간 장소</p>
-              <p className="text-[#5c4a3a]">{answers[40]}</p>
-            </div>
-          )}
-
-          {answers[33] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">가장 맛있게 먹은 것</p>
-              <p className="text-[#5c4a3a]">{answers[33]}</p>
-            </div>
-          )}
-
           {answers[34] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">가장 많이 먹은 음식</p>
-              <p className="text-[#5c4a3a]">{answers[34]}</p>
-            </div>
-          )}
-
-          {answers[35] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">가장 잘한 소비</p>
-              <p className="text-[#5c4a3a]">{answers[35]}</p>
-            </div>
-          )}
-
-          {/* 루틴/일상 섹션 */}
-          {(answers[37] || answers[42]) && (
             <div className="bg-[#d4a574]/10 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-2 font-medium">일상과 루틴</p>
-              {answers[37] && <p className="text-[#5c4a3a] text-sm">• 주말: {answers[37]}</p>}
-              {answers[42] && <p className="text-[#5c4a3a] text-sm">• 루틴: {answers[42]}</p>}
-            </div>
-          )}
-
-          {answers[39] && (
-            <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#c45c4a] mb-1">못해서 아쉬운 것</p>
-              <p className="text-[#5c4a3a]">{answers[39]}</p>
+              <p className="text-sm text-[#8b7355] mb-1">주말에 주로 한 것</p>
+              <p className="text-[#5c4a3a]">{answers[34]}</p>
             </div>
           )}
 
