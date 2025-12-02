@@ -6,6 +6,7 @@ import { useEffect, useState, Suspense } from "react";
 interface AIResult {
   title: string;
   summary: string;
+  insight: string;
   advice: string;
   keywords: string[];
 }
@@ -127,14 +128,22 @@ function FreeResultContent() {
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             2025년 총평
           </h2>
-          <div className="text-center py-4 mb-4">
-            <p className="text-2xl font-bold text-[#5c4a3a]">"{answers[1] || "성장"}"</p>
-            <p className="text-sm text-[#8b7355] mt-1">당신이 정의한 2025년</p>
-          </div>
           <p className="text-[#5c4a3a] leading-relaxed">
             {aiResult?.summary || "올해도 수고했어요."}
           </p>
         </div>
+
+        {/* 설문으로 본 나 */}
+        {aiResult?.insight && (
+          <div className="felt-card stitch-border p-6 mb-6 bg-[#d4a574]/10">
+            <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
+              설문으로 본 당신은
+            </h2>
+            <p className="text-[#5c4a3a] leading-relaxed">
+              {aiResult.insight}
+            </p>
+          </div>
+        )}
 
         {/* 나의 키워드 - 워드클라우드 스타일 */}
         {aiResult?.keywords && aiResult.keywords.length > 0 && (
