@@ -179,7 +179,7 @@ function FreeResultContent() {
         {/* 2025년 총평 */}
         <div className="felt-card stitch-border p-6 mb-6">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            2025년 총평
+            {userName ? `${userName}님의 2025년` : "2025년 총평"}
           </h2>
           <p className="text-[#5c4a3a] leading-relaxed">
             {aiResult?.summary || "올해도 수고했어요."}
@@ -190,7 +190,7 @@ function FreeResultContent() {
         {aiResult?.insight && (
           <div className="felt-card stitch-border p-6 mb-6 bg-[#d4a574]/10">
             <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-              설문으로 본 당신은
+              {userName ? `설문으로 본 ${userName}님은` : "설문으로 본 당신은"}
             </h2>
             <p className="text-[#5c4a3a] leading-relaxed">
               {aiResult.insight}
@@ -202,7 +202,7 @@ function FreeResultContent() {
         {aiResult?.keywords && aiResult.keywords.length > 0 && (
           <div className="felt-card stitch-border p-6 mb-6">
             <h2 className="text-lg font-bold text-[#5c4a3a] mb-4 text-center">
-              나의 2025 키워드
+              {userName ? `${userName}님의 2025 키워드` : "나의 2025 키워드"}
             </h2>
             <div className="flex flex-wrap justify-center items-center gap-3 py-4">
               {aiResult.keywords.map((keyword, index) => {
@@ -232,7 +232,7 @@ function FreeResultContent() {
         {/* 한줄 조언 */}
         <div className="felt-card stitch-border p-6 mb-6 bg-[#6b8e6b]/10">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            2026년을 위한 한마디
+            {userName ? `${userName}님을 위한 한마디` : "2026년을 위한 한마디"}
           </h2>
           <p className="text-[#5c4a3a] leading-relaxed text-center text-lg">
             "{aiResult?.advice || "2026년도 당신답게!"}"

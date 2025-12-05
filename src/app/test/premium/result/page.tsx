@@ -183,10 +183,22 @@ function PremiumResultContent() {
           </p>
         </div>
 
+        {/* 나를 잘 아는 사람이 보는 나 - 상단 배치 */}
+        {answers[2] && answers[3] && (
+          <div className="felt-card stitch-border p-6 mb-6 bg-[#d4a574]/10">
+            <p className="text-sm text-[#8b7355] text-center mb-2">
+              {answers[2]}이(가) 보는 {userName || "나"}
+            </p>
+            <p className="text-[#5c4a3a] text-center text-lg italic">
+              "{answers[3]}"
+            </p>
+          </div>
+        )}
+
         {/* 나만의 키워드 */}
         <div className="felt-card stitch-border p-6 mb-6 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc]">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4 text-center">
-            나만의 키워드
+            {userName ? `${userName}님의 키워드` : "나만의 키워드"}
           </h2>
           <div className="flex flex-wrap justify-center gap-2">
             {keywords.map((keyword, i) => (
@@ -213,7 +225,7 @@ function PremiumResultContent() {
         {/* 감정 분석 */}
         <div className="felt-card stitch-border p-6 mb-6">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            감정 돌아보기
+            {userName ? `${userName}님의 감정` : "감정 돌아보기"}
           </h2>
 
           {answers[4] && (
@@ -232,7 +244,7 @@ function PremiumResultContent() {
 
           {answers[6] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">가장 많이 느낀 감정</p>
+              <p className="text-sm text-[#8b7355] mb-1">요즘 무서운 것</p>
               <p className="text-[#5c4a3a] font-medium">{answers[6]}</p>
             </div>
           )}
@@ -245,12 +257,12 @@ function PremiumResultContent() {
         {/* 관계 */}
         <div className="felt-card stitch-border p-6 mb-6">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            소중한 관계
+            {userName ? `${userName}님의 관계` : "소중한 관계"}
           </h2>
 
           {answers[7] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">고마웠던 사람과 이유</p>
+              <p className="text-sm text-[#8b7355] mb-1">숨겨진 강점</p>
               <p className="text-[#5c4a3a] font-medium">{answers[7]}</p>
             </div>
           )}
@@ -279,12 +291,12 @@ function PremiumResultContent() {
         {/* 성장 */}
         <div className="felt-card stitch-border p-6 mb-6">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            성장 포인트
+            {userName ? `${userName}님의 성장` : "성장 포인트"}
           </h2>
 
           {answers[10] && (
             <div className="bg-white/50 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">가장 큰 변화</p>
+              <p className="text-sm text-[#8b7355] mb-1">1년 전 나라면 안 했을 것</p>
               <p className="text-[#5c4a3a] font-medium">{answers[10]}</p>
             </div>
           )}
@@ -327,7 +339,7 @@ function PremiumResultContent() {
         {/* 취향/나다움 */}
         <div className="felt-card stitch-border p-6 mb-6">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            취향과 나다움
+            {userName ? `${userName}님의 취향` : "취향과 나다움"}
           </h2>
 
           {answers[17] && (
@@ -402,7 +414,7 @@ function PremiumResultContent() {
 
           {answers[26] && (
             <div className="bg-[#d4a574]/20 rounded-xl p-4 mb-3">
-              <p className="text-sm text-[#8b7355] mb-1">길티 플레져</p>
+              <p className="text-sm text-[#8b7355] mb-1">숨겨둔 비밀</p>
               <p className="text-[#5c4a3a] font-medium">{answers[26]}</p>
             </div>
           )}
@@ -424,7 +436,7 @@ function PremiumResultContent() {
         {/* 2026년 조언 */}
         <div className="felt-card stitch-border p-6 mb-6 bg-[#6b8e6b]/10">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
-            2026년을 향한 응원
+            {userName ? `${userName}님을 위한 응원` : "2026년을 향한 응원"}
           </h2>
 
           {answers[28] && (
@@ -453,7 +465,7 @@ function PremiumResultContent() {
           </p>
         </div>
 
-        {/* 올해의 나 */}
+        {/* 올해의 나 - 마무리 */}
         <div className="felt-card stitch-border p-6 mb-6">
           <div className="text-center">
             {answers[1] && (
@@ -463,17 +475,10 @@ function PremiumResultContent() {
               </div>
             )}
 
-            {answers[2] && answers[3] && (
-              <div className="mb-4 pt-4 border-t border-[#d4a574]/30">
-                <p className="text-sm text-[#8b7355] mb-1">{answers[2]}이(가) 보는 나</p>
-                <p className="text-[#5c4a3a] italic">"{answers[3]}"</p>
-              </div>
-            )}
-
             <div className="pt-4 border-t border-[#d4a574]/30">
               <p className="text-[#8b7355] leading-relaxed">
                 2025년, 수고했어요.<br />
-                2026년도 당신답게.
+                2026년도 {userName ? `${userName}님` : "당신"}답게.
               </p>
             </div>
           </div>

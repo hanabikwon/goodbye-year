@@ -28,12 +28,12 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     await page.getByPlaceholder("솔직하게 적어도 괜찮아요").fill("매일 아침 출근길에 지하철에서 눈물이 났던 3월");
     await page.getByRole("button", { name: "다음" }).click();
 
-    // Q6: 감정 (select)
-    await page.getByRole("button", { name: "지침과 번아웃" }).click();
+    // Q6: 무서운 것 (text)
+    await page.getByPlaceholder("예: 건강, 미래, 외로움, 실패").fill("미래에 대한 불확실성");
     await page.getByRole("button", { name: "다음" }).click();
 
-    // Q7: 고마웠던 사람과 이유
-    await page.getByPlaceholder("누구에게, 왜 고마웠는지").fill("엄마, 아무 말 없이 집에 와서 쉬라고 해줘서");
+    // Q7: 숨겨진 강점 (text)
+    await page.getByPlaceholder("숨겨둔 나만의 강점").fill("사람들 앞에서 발표하는 것");
     await page.getByRole("button", { name: "다음" }).click();
 
     // Q8: 소중해진 사람 (optional)
@@ -44,8 +44,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     await page.getByPlaceholder("아쉽지만 멀어진 사람").fill("회사에서 친했던 선배, 퇴사하니 자연스럽게 연락이 끊겼어요");
     await page.getByRole("button", { name: "다음" }).click();
 
-    // Q10: 변화 (select)
-    await page.getByRole("button", { name: "일·커리어" }).click();
+    // Q10: 1년 전 나라면 안 했을 것 (text)
+    await page.getByPlaceholder("과거의 내가 보면 놀랄 일").fill("퇴사하고 쉬면서 나를 돌보는 시간을 가진 것");
     await page.getByRole("button", { name: "다음" }).click();
 
     // Q11: 1년 전 나에게
@@ -107,8 +107,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     await page.getByPlaceholder("흥미를 잃은 것").fill("인스타그램, 남들 잘 사는 거 보는 게 힘들었어요");
     await page.getByRole("button", { name: "다음" }).click();
 
-    // Q26: 길티 플레져 (select)
-    await page.getByRole("button", { name: "늦잠" }).click();
+    // Q26: 숨겨둔 비밀 (text)
+    await page.getByPlaceholder("전 연인 SNS 몰래보기, 숨겨둔 비상금, 아픈 척 약속 취소").fill("가끔 회사 화장실에서 몰래 울었던 것");
     await page.getByRole("button", { name: "다음" }).click();
 
     // Q27: 버려야 할 물건
@@ -139,6 +139,32 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     // 결과 섹션들이 있는지 확인
     await expect(page.getByText("2025년 총평")).toBeVisible();
 
+    // === 질문-답변 매핑 검증 ===
+    // Q2, Q3: 나를 잘 아는 사람이 보는 나 (상단 배치)
+    await expect(page.getByText("오랜 친구 지수이(가) 보는")).toBeVisible();
+    await expect(page.getByText("원래 밝은 애였는데 요즘 많이 지쳐보인다고 걱정해줬어요").first()).toBeVisible();
+
+    // Q4: 행복했던 순간
+    await expect(page.getByText("퇴사 결심하고 제주도 혼자 여행").first()).toBeVisible();
+
+    // Q5: 힘들었던 순간
+    await expect(page.getByText("매일 아침 출근길에 지하철에서").first()).toBeVisible();
+
+    // Q6: 요즘 무서운 것
+    await expect(page.getByText("미래에 대한 불확실성").first()).toBeVisible();
+
+    // Q7: 숨겨진 강점
+    await expect(page.getByText("사람들 앞에서 발표하는 것").first()).toBeVisible();
+
+    // Q10: 1년 전 나라면 안 했을 것
+    await expect(page.getByText("퇴사하고 쉬면서 나를 돌보는").first()).toBeVisible();
+
+    // Q26: 숨겨둔 비밀
+    await expect(page.getByText("가끔 회사 화장실에서 몰래 울었던").first()).toBeVisible();
+
+    // Q28: 되고 싶은 사람
+    await expect(page.getByText("나를 먼저 챙기는 사람").first()).toBeVisible();
+
     // 스크린샷 저장
     await page.screenshot({ path: "tests/screenshots/premium-result.png", fullPage: true });
 
@@ -153,8 +179,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     await page.getByRole("button", { name: "성장" }).click();
     await page.getByRole("button", { name: "다음" }).click();
 
-    // Q2: 많이 들은 말
-    await page.getByPlaceholder("주변에서 자주 들었던 말").fill("요즘 부쩍 어른스러워졌다");
+    // Q2: 혼자 있을 때 하는 것
+    await page.getByPlaceholder("예: 음악 듣기, 멍때리기, 유튜브").fill("유튜브 보면서 과자 먹기");
     await page.getByRole("button", { name: "다음" }).click();
 
     // Q3: 행복했던 순간
@@ -189,8 +215,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     await page.getByPlaceholder("내년의 내 모습").fill("첫 월급 받는 어른");
     await page.getByRole("button", { name: "다음" }).click();
 
-    // Q11: 그만두고 싶은 것
-    await page.getByPlaceholder("더 이상 끌고 가지 않을 것").fill("남들과 비교하는 습관");
+    // Q11: 그만할 것
+    await page.getByPlaceholder("더 이상 안 할 것").fill("남들과 비교하는 습관");
     await page.getByRole("button", { name: "다음" }).click();
 
     // Q12: 하고 싶은 것 (마지막)
@@ -204,7 +230,11 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     await expect(page.locator("h1:has-text('2025')")).toBeVisible({ timeout: 60000 });
 
     // 결과 섹션 확인
-    await expect(page.getByText("2025년 총평")).toBeVisible();
+    await expect(page.getByText(/2025/).first()).toBeVisible();
+
+    // === 질문-답변 매핑 검증 (무료) ===
+    // AI가 키워드 생성했는지 확인
+    await expect(page.getByText(/키워드/)).toBeVisible();
 
     // 스크린샷 저장
     await page.screenshot({ path: "tests/screenshots/free-result.png", fullPage: true });

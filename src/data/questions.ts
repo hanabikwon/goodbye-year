@@ -250,9 +250,9 @@ export const standardQuestions: Question[] = [
   },
   {
     id: 2,
-    question: "올해 가장 많이 들은 말은?",
+    question: "나는 혼자 있을 때 ____를 한다",
     type: "text",
-    placeholder: "주변에서 자주 들었던 말...",
+    placeholder: "예: 음악 듣기, 멍때리기, 유튜브...",
     category: "올해의 나",
   },
 
@@ -340,9 +340,9 @@ export const standardQuestions: Question[] = [
   },
   {
     id: 11,
-    question: "내년엔 뭘 그만두고 싶나?",
+    question: "내년엔 ____는 그만할 거다",
     type: "text",
-    placeholder: "더 이상 끌고 가지 않을 것...",
+    placeholder: "더 이상 안 할 것...",
     category: "미래",
   },
   {
@@ -411,27 +411,18 @@ export const premiumQuestions: Question[] = [
   },
   {
     id: 6,
-    question: "올해 가장 많이 느낀 감정은?",
-    type: "select",
-    options: [
-      "설렘과 기대",
-      "불안과 걱정",
-      "뿌듯함과 성취감",
-      "지침과 번아웃",
-      "감사와 행복",
-      "외로움",
-      "평온함",
-      "혼란스러움",
-    ],
+    question: "요즘 나는 ____가 제일 무섭다",
+    type: "text",
+    placeholder: "예: 건강, 미래, 외로움, 실패...",
     category: "감정과 내면",
   },
 
   // 관계 (3개)
   {
     id: 7,
-    question: "올해 가장 고마웠던 사람과 그 이유는?",
+    question: "사람들은 잘 모르지만 나는 ____에 자신 있다",
     type: "text",
-    placeholder: "누구에게, 왜 고마웠는지...",
+    placeholder: "숨겨둔 나만의 강점...",
     category: "관계",
   },
   {
@@ -454,19 +445,9 @@ export const premiumQuestions: Question[] = [
   // 성장과 변화 (6개)
   {
     id: 10,
-    question: "올해 나에게 가장 큰 변화는?",
-    type: "select",
-    options: [
-      "일·커리어",
-      "관계·사람",
-      "건강·몸",
-      "거주지·환경",
-      "마음가짐",
-      "취미·관심사",
-      "외모",
-      "경제적 상황",
-      "없음",
-    ],
+    question: "1년 전의 나라면 절대 안 했을 것을 올해 했다면?",
+    type: "text",
+    placeholder: "과거의 내가 보면 놀랄 일...",
     category: "성장과 변화",
   },
   {
@@ -586,19 +567,9 @@ export const premiumQuestions: Question[] = [
   },
   {
     id: 26,
-    question: "나만의 길티 플레져가 있다면?",
-    type: "select",
-    options: [
-      "야식",
-      "쇼핑",
-      "게임",
-      "영상 정주행",
-      "늦잠",
-      "SNS",
-      "술",
-      "담배",
-      "기타",
-    ],
+    question: "올해 숨겨둔 작은 비밀은?",
+    type: "text",
+    placeholder: "전 연인 SNS 몰래보기, 숨겨둔 비상금, 아픈 척 약속 취소...",
     category: "나다움/취향",
   },
   {
