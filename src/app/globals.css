@@ -2,7 +2,7 @@
 
 :root {
   /* 손바느질 자수 느낌의 부드러운 컬러 팔레트 */
-  --felt-cream: #f8f4ef;      /* 더 연한 아이보리 배경 */
+  --felt-cream: #F5F1EC;      /* 통일된 아이보리 배경 */
   --felt-brown: #a89a8a;      /* 부드러운 베이지 브라운 */
   --felt-dark: #6b5d4d;       /* 차분한 다크 브라운 */
   --felt-warm: #c9a882;       /* 따뜻한 베이지 */
@@ -52,10 +52,9 @@ body {
 
 /* 카드 스타일 - 부드러운 종이 느낌 */
 .felt-card {
-  background: linear-gradient(145deg, #fdfbf8, #f5f0ea);
+  background: #F5F1EC;
   box-shadow:
-    0 2px 8px rgba(107, 93, 77, 0.08),
-    inset 0 0 40px rgba(200, 180, 160, 0.1);
+    0 2px 8px rgba(107, 93, 77, 0.08);
   border-radius: 16px;
 }
 

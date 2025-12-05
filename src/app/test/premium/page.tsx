@@ -130,7 +130,7 @@ export default function PremiumTestPage() {
             onClick={() => setStarted(true)}
             className="felt-button w-full text-lg"
           >
-            시작하기 - 2,900원
+            시작하기 - 1,900원
           </button>
           <p className="text-center text-xs text-[#b8afa3] mt-3">
             * 현재 테스트 버전입니다

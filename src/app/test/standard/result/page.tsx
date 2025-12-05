@@ -330,7 +330,7 @@ function StandardResultContent() {
               href="/test/premium"
               className="felt-button inline-block"
             >
-              프리미엄 테스트 - 2,900원
+              프리미엄 테스트 - 1,900원
             </a>
           </div>
         </div>

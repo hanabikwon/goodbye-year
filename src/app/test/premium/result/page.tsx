@@ -105,11 +105,19 @@ function PremiumResultContent() {
 
     setIsSaving(true);
     try {
+      // 캡처 전 상단으로 스크롤
+      const currentScroll = window.scrollY;
+      window.scrollTo(0, 0);
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       const canvas = await html2canvas(resultRef.current, {
-        backgroundColor: "#faf6f0",
+        backgroundColor: "#F5F1EC",
         scale: 2,
         useCORS: true,
       });
+
+      // 스크롤 위치 복원
+      window.scrollTo(0, currentScroll);
 
       const link = document.createElement("a");
       link.download = `2025-연말결산-프리미엄-${Date.now()}.png`;
@@ -162,19 +170,31 @@ function PremiumResultContent() {
   return (
     <main className="min-h-screen py-10 px-4">
       <div className="max-w-md mx-auto">
-        <div ref={resultRef} className="bg-[#faf6f0] pb-6">
-        <div className="text-center mb-8 pt-4">
+        <div ref={resultRef} className="bg-[#F5F1EC] pb-4 pt-16">
+        <div className="text-center mb-4">
           <div className="flex justify-center mb-4">
-            <Image
+            <img
               src="/house.png"
               alt="집 아이콘"
               width={100}
               height={100}
+              style={{ width: '100px', height: '100px' }}
             />
           </div>
-          <span className="text-xs text-white bg-[#5c4a3a] px-3 py-1 rounded-full">
-            프리미엄
-          </span>
+          <div className="flex justify-center gap-2 mb-4">
+            <span
+              className="text-xs text-[#ffffff] bg-[#5c4a3a] px-3 rounded-full flex items-center justify-center"
+              style={{ height: '28px', lineHeight: '28px' }}
+            >
+              프리미엄
+            </span>
+            <span
+              className="text-xs text-[#ffffff] bg-[#d4a574] px-3 rounded-full flex items-center justify-center"
+              style={{ height: '28px', lineHeight: '28px' }}
+            >
+              AI 분석
+            </span>
+          </div>
           <h1 className="text-3xl font-bold text-[#5c4a3a] mt-4">
             {userName ? `${userName}님의 2025` : "나의 2025"}
           </h1>
@@ -185,7 +205,7 @@ function PremiumResultContent() {
 
         {/* 나를 잘 아는 사람이 보는 나 - 상단 배치 */}
         {answers[2] && answers[3] && (
-          <div className="felt-card stitch-border p-6 mb-6 bg-[#d4a574]/10">
+          <div className="felt-card stitch-border p-5 mb-4 bg-[rgba(212,165,116,0.1)]">
             <p className="text-sm text-[#8b7355] text-center mb-2">
               {answers[2]}이(가) 보는 {userName || "나"}
             </p>
@@ -196,7 +216,7 @@ function PremiumResultContent() {
         )}
 
         {/* 나만의 키워드 */}
-        <div className="felt-card stitch-border p-6 mb-6 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc]">
+        <div className="felt-card stitch-border p-5 mb-4 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc]">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4 text-center">
             {userName ? `${userName}님의 키워드` : "나만의 키워드"}
           </h2>
@@ -204,7 +224,8 @@ function PremiumResultContent() {
             {keywords.map((keyword, i) => (
               <span
                 key={i}
-                className="px-4 py-2 bg-white/60 rounded-full text-[#5c4a3a] font-medium"
+                className="px-4 bg-[rgba(255,255,255,0.6)] rounded-full text-[#5c4a3a] font-medium flex items-center justify-center"
+                style={{height: '32px'}}
               >
                 #{keyword}
               </span>
@@ -213,7 +234,7 @@ function PremiumResultContent() {
         </div>
 
         {/* 2025년 총평 */}
-        <div className="felt-card stitch-border p-6 mb-6">
+        <div className="felt-card stitch-border p-5 mb-4">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             2025년 총평
           </h2>
@@ -223,27 +244,27 @@ function PremiumResultContent() {
         </div>
 
         {/* 감정 분석 */}
-        <div className="felt-card stitch-border p-6 mb-6">
+        <div className="felt-card stitch-border p-5 mb-4">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             {userName ? `${userName}님의 감정` : "감정 돌아보기"}
           </h2>
 
           {answers[4] && (
-            <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(107,142,107,0.2)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#6b8e6b] mb-1">가장 행복했던 순간</p>
               <p className="text-[#5c4a3a]">"{answers[4]}"</p>
             </div>
           )}
 
           {answers[5] && (
-            <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(196,92,74,0.1)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#c45c4a] mb-1">가장 힘들었던 순간</p>
               <p className="text-[#5c4a3a]">"{answers[5]}"</p>
             </div>
           )}
 
           {answers[6] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">요즘 무서운 것</p>
               <p className="text-[#5c4a3a] font-medium">{answers[6]}</p>
             </div>
@@ -255,27 +276,27 @@ function PremiumResultContent() {
         </div>
 
         {/* 관계 */}
-        <div className="felt-card stitch-border p-6 mb-6">
+        <div className="felt-card stitch-border p-5 mb-4">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             {userName ? `${userName}님의 관계` : "소중한 관계"}
           </h2>
 
           {answers[7] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">숨겨진 강점</p>
               <p className="text-[#5c4a3a] font-medium">{answers[7]}</p>
             </div>
           )}
 
           {answers[8] && (
-            <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(107,142,107,0.2)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#6b8e6b] mb-1">새롭게 소중해진 사람</p>
               <p className="text-[#5c4a3a]">{answers[8]}</p>
             </div>
           )}
 
           {answers[9] && (
-            <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(196,92,74,0.1)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#c45c4a] mb-1">멀어진 사람</p>
               <p className="text-[#5c4a3a]">{answers[9]}</p>
             </div>
@@ -289,41 +310,41 @@ function PremiumResultContent() {
         </div>
 
         {/* 성장 */}
-        <div className="felt-card stitch-border p-6 mb-6">
+        <div className="felt-card stitch-border p-5 mb-4">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             {userName ? `${userName}님의 성장` : "성장 포인트"}
           </h2>
 
           {answers[10] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">1년 전 나라면 안 했을 것</p>
               <p className="text-[#5c4a3a] font-medium">{answers[10]}</p>
             </div>
           )}
 
           {answers[12] && (
-            <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(196,92,74,0.1)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#c45c4a] mb-1">자주 미룬 것</p>
               <p className="text-[#5c4a3a]">{answers[12]}</p>
             </div>
           )}
 
           {answers[14] && (
-            <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(107,142,107,0.2)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#6b8e6b] mb-1">완주한 것</p>
               <p className="text-[#5c4a3a]">{answers[14]}</p>
             </div>
           )}
 
           {answers[13] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">포기한 것 중 후회되는 것</p>
               <p className="text-[#5c4a3a]">{answers[13]}</p>
             </div>
           )}
 
           {answers[11] && (
-            <div className="bg-[#d4a574]/20 rounded-xl p-4 border-2 border-dashed border-[#d4a574]">
+            <div className="bg-[rgba(212,165,116,0.2)] rounded-xl p-4 border-2 border-dashed border-[#d4a574]">
               <p className="text-sm text-[#8b7355] mb-1">1년 전 나에게</p>
               <p className="text-[#5c4a3a] italic">"{answers[11]}"</p>
             </div>
@@ -337,90 +358,90 @@ function PremiumResultContent() {
         </div>
 
         {/* 취향/나다움 */}
-        <div className="felt-card stitch-border p-6 mb-6">
+        <div className="felt-card stitch-border p-5 mb-4">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             {userName ? `${userName}님의 취향` : "취향과 나다움"}
           </h2>
 
           {answers[17] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">많이 들은 노래/아티스트</p>
               <p className="text-[#5c4a3a]">{answers[17]}</p>
             </div>
           )}
 
           {answers[16] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">보다가 만 영화/드라마</p>
               <p className="text-[#5c4a3a]">{answers[16]}</p>
             </div>
           )}
 
           {answers[18] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">기억에 남는 책</p>
               <p className="text-[#5c4a3a]">{answers[18]}</p>
             </div>
           )}
 
           {answers[19] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">좋았던 장소/공간</p>
               <p className="text-[#5c4a3a]">{answers[19]}</p>
             </div>
           )}
 
           {answers[20] && (
-            <div className="bg-[#6b8e6b]/20 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(107,142,107,0.2)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#6b8e6b] mb-1">최고의 여행지</p>
               <p className="text-[#5c4a3a]">{answers[20]}</p>
             </div>
           )}
 
           {answers[21] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">가장 맛있게 먹은 것</p>
               <p className="text-[#5c4a3a]">{answers[21]}</p>
             </div>
           )}
 
           {answers[22] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">가장 잘한 소비</p>
               <p className="text-[#5c4a3a]">{answers[22]}</p>
             </div>
           )}
 
           {answers[23] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">새로운 취미/관심사</p>
               <p className="text-[#5c4a3a]">{answers[23]}</p>
             </div>
           )}
 
           {answers[24] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">자주 뿌린 향수</p>
               <p className="text-[#5c4a3a]">{answers[24]}</p>
             </div>
           )}
 
           {answers[25] && (
-            <div className="bg-[#c45c4a]/10 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(196,92,74,0.1)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#c45c4a] mb-1">매력이 없어진 것</p>
               <p className="text-[#5c4a3a]">{answers[25]}</p>
             </div>
           )}
 
           {answers[26] && (
-            <div className="bg-[#d4a574]/20 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(212,165,116,0.2)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">숨겨둔 비밀</p>
               <p className="text-[#5c4a3a] font-medium">{answers[26]}</p>
             </div>
           )}
 
           {answers[27] && (
-            <div className="bg-white/50 rounded-xl p-4 mb-3">
+            <div className="bg-[rgba(255,255,255,0.5)] rounded-xl p-4 mb-3">
               <p className="text-sm text-[#8b7355] mb-1">버려야 할 물건</p>
               <p className="text-[#5c4a3a]">{answers[27]}</p>
             </div>
@@ -434,7 +455,7 @@ function PremiumResultContent() {
         </div>
 
         {/* 2026년 조언 */}
-        <div className="felt-card stitch-border p-6 mb-6 bg-[#6b8e6b]/10">
+        <div className="felt-card stitch-border p-5 mb-4 bg-[rgba(107,142,107,0.1)]">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             {userName ? `${userName}님을 위한 응원` : "2026년을 향한 응원"}
           </h2>
@@ -447,7 +468,7 @@ function PremiumResultContent() {
           )}
 
           {answers[29] && (
-            <div className="text-center py-2 mb-4 bg-white/50 rounded-xl">
+            <div className="text-center py-2 mb-4 bg-[rgba(255,255,255,0.5)] rounded-xl">
               <p className="text-sm text-[#6b8e6b] mb-1">1월에 바로 실행할 것</p>
               <p className="text-[#5c4a3a] font-medium">{answers[29]}</p>
             </div>
@@ -466,7 +487,7 @@ function PremiumResultContent() {
         </div>
 
         {/* 올해의 나 - 마무리 */}
-        <div className="felt-card stitch-border p-6 mb-6">
+        <div className="felt-card stitch-border p-5 mb-4">
           <div className="text-center">
             {answers[1] && (
               <div className="mb-4">
@@ -475,7 +496,7 @@ function PremiumResultContent() {
               </div>
             )}
 
-            <div className="pt-4 border-t border-[#d4a574]/30">
+            <div className="pt-4 border-t border-[rgba(212,165,116,0.3)]">
               <p className="text-[#8b7355] leading-relaxed">
                 2025년, 수고했어요.<br />
                 2026년도 {userName ? `${userName}님` : "당신"}답게.
@@ -501,15 +522,15 @@ function PremiumResultContent() {
           <button
             onClick={handleShare}
             className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355]
-                       hover:bg-[#8b7355] hover:text-white transition-colors"
+                       hover:bg-[#8b7355] hover:text-[#ffffff] transition-colors"
           >
             결과 공유하기
           </button>
 
           <button
             onClick={handleCopyLink}
-            className="w-full py-3 rounded-full border-2 border-[#8b7355]/50 text-[#8b7355]/70
-                       hover:bg-[#8b7355]/10 transition-colors text-sm"
+            className="w-full py-3 rounded-full border-2 border-[rgba(139,115,85,0.5)] text-[rgba(139,115,85,0.7)]
+                       hover:bg-[rgba(139,115,85,0.1)] transition-colors text-sm"
           >
             {copied ? "복사됨!" : "링크 복사"}
           </button>
@@ -527,11 +548,11 @@ function PremiumResultContent() {
           <summary className="text-xs text-[#a89a8a] cursor-pointer hover:underline">
             전체 답변 보기
           </summary>
-          <div className="mt-4 p-4 bg-white/50 rounded-xl text-xs text-[#8b7355] space-y-3">
+          <div className="mt-4 p-4 bg-[rgba(255,255,255,0.5)] rounded-xl text-xs text-[#8b7355] space-y-3">
             {Object.entries(answers).map(([id, answer]) => {
               const question = premiumQuestions.find(q => q.id === Number(id));
               return (
-                <div key={id} className="border-b border-[#d4a574]/20 pb-2">
+                <div key={id} className="border-b border-[rgba(212,165,116,0.2)] pb-2">
                   <p className="font-bold text-[#5c4a3a]">Q{id}. {question?.question || "알 수 없음"}</p>
                   <p className="mt-1">{answer}</p>
                 </div>

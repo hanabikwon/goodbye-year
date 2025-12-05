@@ -208,7 +208,7 @@ function LightResultContent() {
               href="/test/standard"
               className="felt-button inline-block"
             >
-              스탠다드 테스트 - 2,900원
+              스탠다드 테스트 - 1,900원
             </a>
           </div>
         </div>

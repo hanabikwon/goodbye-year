@@ -79,7 +79,7 @@ export default function SelectPage() {
                   종합 분석
                 </h3>
               </div>
-              <p className="text-xl font-medium text-[#b8956b]">2,900원</p>
+              <p className="text-xl font-medium text-[#b8956b]">1,900원</p>
             </div>
             <p className="text-sm text-[#a89a8a] mb-3">
               30개 질문 · 약 15분 · 심층 AI 분석

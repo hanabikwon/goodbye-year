@@ -156,7 +156,7 @@ function ResultContent() {
               href="/test/premium"
               className="felt-button inline-block"
             >
-              종합 분석 테스트 - 2,900원
+              종합 분석 테스트 - 1,900원
             </a>
           </div>
         </div>

@@ -102,11 +102,19 @@ function FreeResultContent() {
 
     setIsSaving(true);
     try {
+      // 캡처 전 상단으로 스크롤
+      const currentScroll = window.scrollY;
+      window.scrollTo(0, 0);
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       const canvas = await html2canvas(resultRef.current, {
-        backgroundColor: "#faf6f0",
+        backgroundColor: "#F5F1EC",
         scale: 2,
         useCORS: true,
       });
+
+      // 스크롤 위치 복원
+      window.scrollTo(0, currentScroll);
 
       const link = document.createElement("a");
       link.download = `2025-연말결산-${Date.now()}.png`;
@@ -149,22 +157,29 @@ function FreeResultContent() {
   return (
     <main className="min-h-screen py-10 px-4">
       <div className="max-w-md mx-auto">
-        <div ref={resultRef} className="bg-[#faf6f0] pb-6">
+        <div ref={resultRef} className="bg-[#F5F1EC] pb-4 pt-16">
         {/* 헤더 */}
-        <div className="text-center mb-8 pt-4">
+        <div className="text-center mb-4">
           <div className="flex justify-center mb-4">
-            <Image
+            <img
               src="/house.png"
               alt="집 아이콘"
               width={100}
               height={100}
+              style={{ width: '100px', height: '100px' }}
             />
           </div>
           <div className="flex justify-center gap-2 mb-4">
-            <span className="text-xs text-white bg-[#6b8e6b] px-3 py-1 rounded-full">
+            <span
+              className="text-xs text-[#ffffff] bg-[#6b8e6b] px-3 rounded-full flex items-center justify-center"
+              style={{ height: '28px', lineHeight: '28px' }}
+            >
               무료
             </span>
-            <span className="text-xs text-white bg-[#d4a574] px-3 py-1 rounded-full">
+            <span
+              className="text-xs text-[#ffffff] bg-[#d4a574] px-3 rounded-full flex items-center justify-center"
+              style={{ height: '28px', lineHeight: '28px' }}
+            >
               AI 분석
             </span>
           </div>
@@ -177,7 +192,7 @@ function FreeResultContent() {
         </div>
 
         {/* 2025년 총평 */}
-        <div className="felt-card stitch-border p-6 mb-6">
+        <div className="felt-card stitch-border p-5 mb-4">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             {userName ? `${userName}님의 2025년` : "2025년 총평"}
           </h2>
@@ -188,7 +203,7 @@ function FreeResultContent() {
 
         {/* 설문으로 본 나 */}
         {aiResult?.insight && (
-          <div className="felt-card stitch-border p-6 mb-6 bg-[#d4a574]/10">
+          <div className="felt-card stitch-border p-5 mb-4 bg-[rgba(212,165,116,0.1)]">
             <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
               {userName ? `설문으로 본 ${userName}님은` : "설문으로 본 당신은"}
             </h2>
@@ -200,7 +215,7 @@ function FreeResultContent() {
 
         {/* 나의 키워드 - 워드클라우드 스타일 */}
         {aiResult?.keywords && aiResult.keywords.length > 0 && (
-          <div className="felt-card stitch-border p-6 mb-6">
+          <div className="felt-card stitch-border p-5 mb-4">
             <h2 className="text-lg font-bold text-[#5c4a3a] mb-4 text-center">
               {userName ? `${userName}님의 2025 키워드` : "나의 2025 키워드"}
             </h2>
@@ -215,11 +230,11 @@ function FreeResultContent() {
                   "text-[#8b7355]",
                   "text-[#c4956a]"
                 ];
-                const rotations = ["rotate-[-3deg]", "rotate-[2deg]", "rotate-[-1deg]", "rotate-[3deg]", "rotate-[-2deg]"];
                 return (
                   <span
                     key={index}
-                    className={`font-bold ${sizes[index % 5]} ${colors[index % 5]} ${rotations[index % 5]} transform transition-transform hover:scale-110`}
+                    className={`font-bold ${sizes[index % 5]} ${colors[index % 5]} flex items-center justify-center`}
+                    style={{lineHeight: '1.2'}}
                   >
                     #{keyword}
                   </span>
@@ -230,7 +245,7 @@ function FreeResultContent() {
         )}
 
         {/* 한줄 조언 */}
-        <div className="felt-card stitch-border p-6 mb-6 bg-[#6b8e6b]/10">
+        <div className="felt-card stitch-border p-5 mb-4 bg-[rgba(107,142,107,0.1)]">
           <h2 className="text-lg font-bold text-[#5c4a3a] mb-4">
             {userName ? `${userName}님을 위한 한마디` : "2026년을 위한 한마디"}
           </h2>
@@ -245,7 +260,7 @@ function FreeResultContent() {
         </div>{/* ref 끝 */}
 
         {/* 프리미엄 CTA - 강조 */}
-        <div className="felt-card stitch-border p-6 mb-6 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc] border-2 border-[#d4a574]">
+        <div className="felt-card stitch-border p-5 mb-4 bg-gradient-to-br from-[#f5e6d3] to-[#e8d4bc] border-2 border-[#d4a574]">
           <div className="text-center">
             <p className="text-lg font-bold text-[#5c4a3a] mb-2">
               더 깊이 알고 싶다면?
@@ -255,11 +270,11 @@ function FreeResultContent() {
               취향/나다움 분석까지!
             </p>
             <div className="flex flex-wrap justify-center gap-2 text-xs text-[#8b7355] mb-4">
-              <span className="bg-white/50 px-2 py-1 rounded-full">감정 분석</span>
-              <span className="bg-white/50 px-2 py-1 rounded-full">관계 돌아보기</span>
-              <span className="bg-white/50 px-2 py-1 rounded-full">성장 포인트</span>
-              <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">취향</span>
-              <span className="bg-[#6b8e6b]/20 px-2 py-1 rounded-full">나다움</span>
+              <span className="bg-white/50 px-2 rounded-full flex items-center justify-center" style={{height: '24px'}}>감정 분석</span>
+              <span className="bg-white/50 px-2 rounded-full flex items-center justify-center" style={{height: '24px'}}>관계 돌아보기</span>
+              <span className="bg-white/50 px-2 rounded-full flex items-center justify-center" style={{height: '24px'}}>성장 포인트</span>
+              <span className="bg-[#6b8e6b]/20 px-2 rounded-full flex items-center justify-center" style={{height: '24px'}}>취향</span>
+              <span className="bg-[#6b8e6b]/20 px-2 rounded-full flex items-center justify-center" style={{height: '24px'}}>나다움</span>
             </div>
             <p className="text-xs text-[#6b8e6b] mb-4">
               + 질문과 답변 전체 확인 및 저장 가능!
@@ -268,7 +283,7 @@ function FreeResultContent() {
               href="/test/premium"
               className="felt-button inline-block"
             >
-              프리미엄 분석 받기 - 2,900원
+              프리미엄 분석 받기 - 1,900원
             </a>
           </div>
         </div>

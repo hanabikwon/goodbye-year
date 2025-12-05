@@ -355,7 +355,7 @@ export const standardQuestions: Question[] = [
 ];
 
 // ============================================
-// 프리미엄 질문 (30개) - 2,900원
+// 프리미엄 질문 (30개) - 1,900원
 // ============================================
 export const premiumQuestions: Question[] = [
   // 올해의 나 (3개)
@@ -610,5 +610,5 @@ export const questions = freeQuestions;
 // 티어별 가격 (2티어 구조)
 export const tierPricing = {
   free: { price: 0, questions: 12, name: "무료", hasAI: true, aiType: "light" },
-  premium: { price: 2900, questions: 30, name: "프리미엄", hasAI: true, aiType: "full" },
+  premium: { price: 1900, questions: 30, name: "프리미엄", hasAI: true, aiType: "full" },
 };
