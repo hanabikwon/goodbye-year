@@ -99,8 +99,9 @@ export default function SelectPage() {
               </span>
             </div>
             <div className="space-y-1 text-xs text-[#b8afa3] italic pt-3 border-t border-[#ebe5dc]">
+              <p>"요즘 나는 ____가 제일 무섭다"</p>
+              <p>"1년 전의 나라면 절대 안 했을 것을 올해 했다면?"</p>
               <p>"그때는 좋았는데 지금은 매력이 없어 보이는 무언가?"</p>
-              <p>"나만의 길티 플레져가 있다면?"</p>
               <p>"올해 가장 잘한 소비는?"</p>
               <p>"내년 이맘때 나는 어디에서 무엇을 하고 있을까?"</p>
             </div>
