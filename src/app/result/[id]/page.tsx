@@ -270,7 +270,7 @@ export default function SharedResultPage() {
             <button
               onClick={handleDownloadImage}
               disabled={isSaving}
-              className="w-full py-3 rounded-full border-2 border-[#d4a574] text-[#d4a574] hover:bg-[#d4a574] hover:text-white transition-colors font-medium"
+              className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355] hover:bg-[#8b7355] hover:text-white transition-colors font-medium"
             >
               {isSaving ? "저장 중..." : "이미지로 저장하기"}
             </button>
@@ -662,7 +662,7 @@ export default function SharedResultPage() {
           <button
             onClick={handleDownloadImage}
             disabled={isSaving}
-            className="w-full py-3 rounded-full border-2 border-[#d4a574] text-[#d4a574] hover:bg-[#d4a574] hover:text-white transition-colors font-medium"
+            className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355] hover:bg-[#8b7355] hover:text-white transition-colors font-medium"
           >
             {isSaving ? "저장 중..." : "이미지로 저장하기"}
           </button>
