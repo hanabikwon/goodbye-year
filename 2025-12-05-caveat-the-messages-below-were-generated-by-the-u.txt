@@ -706,5 +706,177 @@
   - 이미지 저장 정렬 수정
   - E2E 테스트 업데이트
 
+> /export 
+  ⎿  Conversation exported to: 
+     2025-12-05-caveat-the-messages-below-were-generated-by-the-u.txt
+
+> 미리보기 질문이 
+
+⏺ 미리보기 질문이 어떤 게 문제인가요?
+
+> 지금은 없는건데 써있는듯 
+
+⏺ 미리보기 질문이 어디에 표시되는지 찾아보겠습니다.
+
+⏺ Search(pattern: "미리보기|preview|질문 예시", path: "src", output_mode:
+        "content")
+  ⎿  Found 0 lines 
+
+⏺ Search(pattern: "올해.*한 단어|행복했던|힘들었던|고마운", path: "src/app",
+        output_mode: "content")
+  ⎿  Found 171 lines (ctrl+o to expand)
+
+⏺ 어떤 페이지에서 미리보기 질문이 보이나요? select 페이지나 premium 시작
+  페이지를 확인해볼게요:
+
+⏺ Read(src/app/select/page.tsx)
+  ⎿  Read 59 lines
+
+⏺ 찾았습니다! /select 페이지에 미리보기 질문들이 있네요. 실제 질문과
+  일치하는지 확인해볼게요:
+
+⏺ Search(pattern: "고마웠던 사람|1년 전의 나에게|내년에 꼭|매력이 없어|길티
+        플레져|잘한 소비|내년 이맘때", path: "src/data/questions.ts",
+        output_mode: "content")
+  ⎿  Found 8 lines (ctrl+o to expand)
+
+⏺ Search(pattern: "길티", path: "src/data/questions.ts", output_mode: "content")
+  ⎿  Found 0 lines 
+
+⏺ 찾았습니다! "나만의 길티 플레져가 있다면?" 질문이 실제로는 없네요.
+  수정하겠습니다:
+
+⏺ Update(src/app/select/page.tsx)
+  ⎿  Updated src/app/select/page.tsx with 1 removal                      
+       100                </div>
+       101                <div className="space-y-1 text-xs 
+             text-[#b8afa3] italic pt-3 border-t border-[#ebe5dc]">
+       102                  <p>"그때는 좋았는데 지금은 매력이 없어 보이는
+              무언가?"</p>
+       103 -                <p>"나만의 길티 플레져가 있다면?"</p>
+       103                  <p>"올해 가장 잘한 소비는?"</p>
+       104                  <p>"내년 이맘때 나는 어디에서 무엇을 하고 
+             있을까?"</p>
+       105                </div>
+
+⏺ ✅ "나만의 길티 플레져가 있다면?" 삭제 완료
+
+  다른 곳에도 없는 질문이 있는지 확인:
+
+⏺ Search(pattern: "길티", output_mode: "content")
+  ⎿  Found 2 lines (ctrl+o to expand)
+
+⏺ 주석에도 남아있네요. 실제 질문 26번이 뭔지 확인:
+
+⏺ Search(pattern: "id: 26", path: "src/data/questions.ts", output_mode:
+        "content")
+  ⎿  Found 7 lines (ctrl+o to expand)
+
+⏺ 주석 업데이트:
+
+⏺ Update(src/app/test/premium/result/page.tsx)
+  ⎿  Updated src/app/test/premium/result/page.tsx with 1 addition and 1    
+     removal
+       164      // 4: 행복한 순간, 5: 힘든 순간, 6: 감정
+       165      // 7: 고마운 사람+이유, 8: 소중해진 사람, 9: 멀어진 사람
+       166      // 10: 변화, 11: 1년 전 나에게, 12: 자주 미룬 것, 13: 
+             포기한 것, 14: 완주한 것, 15: 고민 중
+       167 -    // 16: 보다가 만 것, 17: 노래, 18: 책, 19: 장소, 20: 
+           -  여행지, 21: 음식, 22: 잘한 소비, 23: 취미, 24: 향수, 25: 
+           -  매력 없어진 것, 26: 길티 플레져, 27: 버릴 물건
+       167 +    // 16: 보다가 만 것, 17: 노래, 18: 책, 19: 장소, 20: 
+           +  여행지, 21: 음식, 22: 잘한 소비, 23: 취미, 24: 향수, 25: 
+           +  매력 없어진 것, 26: 숨겨둔 비밀, 27: 버릴 물건
+       168      // 28: 되고 싶은 사람, 29: 1월 실행, 30: 1년 후 나
+       169    
+       170      return (
+
+⏺ ✅ 수정 완료:
+  - /select 페이지에서 없는 질문 "나만의 길티 플레져가 있다면?" 삭제
+  - 주석 업데이트 (26: 길티 플레져 → 숨겨둔 비밀)
+
+  커밋할까요?
+
+> 종합 분석 미리보기 질문 2개 더 추가하고 싶거든. 후킹한거없을까? 제안해줘봐
+ 리스트
+
+⏺ 프리미엄 질문들 중에서 후킹될만한 것들 찾아볼게요:
+
+⏺ Search(pattern: "question:", path: "src/data/questions.ts", output_mode:
+        "content")
+  ⎿  Found 68 lines (ctrl+o to expand)
+
+⏺ 프리미엄 전용 질문 중 후킹되는 것들 추천:
+
+  🔥 강력 추천 (2개 선택)
+
+  | 질문                             | 후킹 포인트       |
+  |--------------------------------|--------------|
+  | "요즘 나는 ____가 제일 무섭다"           | 감정 자극, 공감 유발 |
+  | "1년 전의 나라면 절대 안 했을 것을 올해 했다면?" | 성장 스토리, 궁금증
+  |
+  | "올해 숨겨둔 작은 비밀은?"               | 은밀함, 호기심 자극  |
+  | "사람들은 잘 모르지만 나는 ____에 자신 있다"   | 자기 발견, 긍정적   |
+
+  👍 차선 추천
+
+  | 질문                             | 후킹 포인트  |
+  |--------------------------------|---------|
+  | "올해 포기한 것 중 후회되는 게 있나?"        | 감정 자극   |
+  | "버리기를 미루고 있던 지금 당장 버려야 할 물건은?" | 공감, 구체적 |
+  | "그 사람은 나를 뭐라고 표현할까?"           | 타인 시선   |
+
+  내 추천 조합
+
+  1. "요즘 나는 ____가 제일 무섭다"
+  2. "1년 전의 나라면 절대 안 했을 것을 올해 했다면?"
+
+  이유: 감정(두려움) + 성장(변화) 둘 다 커버하면서 "이 질문 답하고 싶다"
+  느낌
+
+  어떤 걸로 할까요?
+
+> ㄱㄱ 
+
+⏺ Update(src/app/select/page.tsx)
+  ⎿  Updated src/app/select/page.tsx with 2 additions                    
+        99                  </span>
+       100                </div>
+       101                <div className="space-y-1 text-xs 
+             text-[#b8afa3] italic pt-3 border-t border-[#ebe5dc]">
+       102 +                <p>"요즘 나는 ____가 제일 무섭다"</p>
+       103 +                <p>"1년 전의 나라면 절대 안 했을 것을 올해 
+           + 했다면?"</p>
+       104                  <p>"그때는 좋았는데 지금은 매력이 없어 보이는
+              무언가?"</p>
+       105                  <p>"올해 가장 잘한 소비는?"</p>
+       106                  <p>"내년 이맘때 나는 어디에서 무엇을 하고 
+             있을까?"</p>
+
+⏺ ✅ 추가 완료!
+
+  프리미엄 미리보기 질문 (5개):
+  1. "요즘 나는 ____가 제일 무섭다" ← 새로 추가
+  2. "1년 전의 나라면 절대 안 했을 것을 올해 했다면?" ← 새로 추가
+  3. "그때는 좋았는데 지금은 매력이 없어 보이는 무언가?"
+  4. "올해 가장 잘한 소비는?"
+  5. "내년 이맘때 나는 어디에서 무엇을 하고 있을까?"
+
+  커밋 & 푸시할게요:
+
+⏺ Bash(git add -A && git commit -m "미리보기 질문 수정 및 후킹 질문 추가…)
+  ⎿ [main b898470] 미리보기 질문 수정 및 후킹 질문 추가                    
+     3 files changed, 713 insertions(+), 2 deletions(-)
+     create mode 100644 2025-12-05-caveat-the-messages-below-were-generated
+    … +3 lines (ctrl+o to expand)
+
+
+⏺ ✅ 커밋 & 푸시 완료!
+
+  b898470 미리보기 질문 수정 및 후킹 질문 추가
+
+  (참고: export된 대화 파일도 같이 커밋됐는데, 필요 없으면 나중에 삭제해도
+  됨)
+
 
 

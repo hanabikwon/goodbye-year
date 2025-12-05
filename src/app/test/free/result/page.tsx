@@ -23,6 +23,7 @@ function FreeResultContent() {
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [userName, setUserName] = useState<string>("");
+  const [shortId, setShortId] = useState<string | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,6 +68,28 @@ function FreeResultContent() {
 
       const data = await response.json();
       setAiResult(data.result);
+
+      // Supabase에 결과 저장
+      const storedName = localStorage.getItem("userName");
+      try {
+        const saveResponse = await fetch("/api/results", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tier: "free",
+            userName: storedName || null,
+            answers: answersData,
+            aiResult: data.result,
+          }),
+        });
+        if (saveResponse.ok) {
+          const saveData = await saveResponse.json();
+          setShortId(saveData.id);
+        }
+      } catch (saveError) {
+        console.error("Failed to save result:", saveError);
+        // 저장 실패해도 결과는 보여줌
+      }
     } catch (e) {
       console.error("AI generation failed:", e);
       setAiResult(null);
@@ -75,8 +98,11 @@ function FreeResultContent() {
     }
   };
 
+  // shortId가 있으면 짧은 URL 사용, 없으면 기존 방식
   const shareUrl = typeof window !== "undefined"
-    ? `${window.location.origin}/view/free?data=${searchParams.get("data")}`
+    ? shortId
+      ? `${window.location.origin}/result/${shortId}`
+      : `${window.location.origin}/view/free?data=${searchParams.get("data")}`
     : "";
 
   const handleCopyLink = async () => {
