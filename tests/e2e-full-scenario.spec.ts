@@ -6,6 +6,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
 
   test("프리미엄 30개 질문 - 직장인 번아웃 회복 시나리오", async ({ page }) => {
     await page.goto("/test/premium");
+    // localStorage에 닉네임 설정 (메인 페이지에서 입력하는 것 시뮬레이션)
+    await page.evaluate(() => localStorage.setItem("userName", "민지"));
     await page.getByRole("button", { name: /시작하기/ }).click();
 
     // Q1: 한 단어 (select)
@@ -139,6 +141,9 @@ test.describe("실제 시나리오 E2E 테스트", () => {
     // 결과 섹션들이 있는지 확인
     await expect(page.getByText("2025년 총평")).toBeVisible();
 
+    // === 닉네임 표시 확인 ===
+    await expect(page.locator("h1:has-text('민지님의 2025')")).toBeVisible();
+
     // === 질문-답변 매핑 검증 ===
     // Q2, Q3: 나를 잘 아는 사람이 보는 나 (상단 배치)
     await expect(page.getByText("오랜 친구 지수이(가) 보는")).toBeVisible();
@@ -173,6 +178,8 @@ test.describe("실제 시나리오 E2E 테스트", () => {
 
   test("무료 12개 질문 - 대학생 성장 시나리오", async ({ page }) => {
     await page.goto("/test/free");
+    // localStorage에 닉네임 설정 (메인 페이지에서 입력하는 것 시뮬레이션)
+    await page.evaluate(() => localStorage.setItem("userName", "준호"));
     await page.getByRole("button", { name: /시작하기/ }).click();
 
     // Q1: 한 단어 (select)
@@ -231,6 +238,9 @@ test.describe("실제 시나리오 E2E 테스트", () => {
 
     // 결과 섹션 확인
     await expect(page.getByText(/2025/).first()).toBeVisible();
+
+    // === 닉네임 표시 확인 ===
+    await expect(page.locator("h1:has-text('준호님의 2025')")).toBeVisible();
 
     // === 질문-답변 매핑 검증 (무료) ===
     // AI가 키워드 생성했는지 확인
