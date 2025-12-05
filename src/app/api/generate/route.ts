@@ -65,7 +65,17 @@ const tierPrompts: Record<Tier, string> = {
 
 export async function POST(request: NextRequest) {
   try {
-    const { answers, tier } = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid request body" },
+        { status: 400 }
+      );
+    }
+
+    const { answers, tier } = body;
 
     if (!answers || !tier) {
       return NextResponse.json(
