@@ -270,7 +270,7 @@ export default function SharedResultPage() {
             <button
               onClick={handleDownloadImage}
               disabled={isSaving}
-              className="felt-button w-full"
+              className="w-full py-3 rounded-full border-2 border-[#d4a574] text-[#d4a574] hover:bg-[#d4a574] hover:text-white transition-colors font-medium"
             >
               {isSaving ? "저장 중..." : "이미지로 저장하기"}
             </button>
@@ -282,7 +282,7 @@ export default function SharedResultPage() {
             </button>
             <button
               onClick={handleCopyLink}
-              className="w-full py-3 rounded-full border-2 border-[#8b7355]/50 text-[#8b7355]/70 hover:bg-[#8b7355]/10 transition-colors text-sm"
+              className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355] hover:bg-[#8b7355] hover:text-white transition-colors font-medium"
             >
               {copied ? "복사됨!" : "링크 복사"}
             </button>
@@ -662,23 +662,21 @@ export default function SharedResultPage() {
           <button
             onClick={handleDownloadImage}
             disabled={isSaving}
-            className="felt-button w-full"
+            className="w-full py-3 rounded-full border-2 border-[#d4a574] text-[#d4a574] hover:bg-[#d4a574] hover:text-white transition-colors font-medium"
           >
             {isSaving ? "저장 중..." : "이미지로 저장하기"}
           </button>
 
           <button
             onClick={handleShare}
-            className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355]
-                       hover:bg-[#8b7355] hover:text-[#ffffff] transition-colors"
+            className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355] hover:bg-[#8b7355] hover:text-white transition-colors font-medium"
           >
             결과 공유하기
           </button>
 
           <button
             onClick={handleCopyLink}
-            className="w-full py-3 rounded-full border-2 border-[rgba(139,115,85,0.5)] text-[rgba(139,115,85,0.7)]
-                       hover:bg-[rgba(139,115,85,0.1)] transition-colors text-sm"
+            className="w-full py-3 rounded-full border-2 border-[#8b7355] text-[#8b7355] hover:bg-[#8b7355] hover:text-white transition-colors font-medium"
           >
             {copied ? "복사됨!" : "링크 복사"}
           </button>
