@@ -40,8 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# conversation logs
-conversation-*.txt
+# conversation logs & txt files
+*.txt
 
 # planning docs (optional)
 PLAN.md
